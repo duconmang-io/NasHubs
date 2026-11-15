@@ -35,6 +35,9 @@ jobs:
       # SPA fallback: serve index.html for unknown deep links (client-side routing).
       - run: cp dist/index.html dist/404.html
 
+      # Real 200 pages for routes linked from the App Store (privacy, security).
+      - run: for r in privacy security; do mkdir -p dist/$r && cp dist/index.html dist/$r/index.html; done
+
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3
