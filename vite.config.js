@@ -4,9 +4,8 @@ import { fileURLToPath, URL } from 'node:url'
 
 // https://vite.dev/config/
 export default defineConfig({
-  // Project site served under /<repo>/. If you later attach a custom domain
-  // (e.g. nashubs.app), change this back to '/'.
-  base: '/NasHubs-Website/',
+  // Served from the custom domain https://nashubs.duconmang.io.vn/ (root path).
+  base: '/',
   plugins: [react()],
   resolve: {
     alias: {
