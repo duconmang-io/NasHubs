@@ -1,55 +1,31 @@
 name: Deploy to GitHub Pages
 
-# Build the Vite site and publish it to GitHub Pages on every push to main.
+# Static site in site/ (no build step), published on every push to main.
 on:
   push:
     branches: [main]
   workflow_dispatch:
 
-# Permissions the GITHUB_TOKEN needs to publish to Pages.
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow one concurrent deploy; don't cancel an in-progress run.
 concurrency:
   group: pages
   cancel-in-progress: false
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-
-      - run: npm ci
-
-      - run: npm run build
-
-      # SPA fallback: serve index.html for unknown deep links (client-side routing).
-      - run: cp dist/index.html dist/404.html
-
-      # Real 200 pages for routes linked from the App Store (privacy, security).
-      - run: for r in privacy security; do mkdir -p dist/$r && cp dist/index.html dist/$r/index.html; done
-
-      - uses: actions/configure-pages@v5
-
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
-
   deploy:
-    needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
       - id: deployment
         uses: actions/deploy-pages@v4

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cam kết bảo mật · NasHubs</title>
+<meta name="description" content="Cam kết bảo mật của ứng dụng NasHubs.">
+<meta name="theme-color" content="#1D2433">
+<link rel="icon" href="/assets/nashubs.svg" type="image/svg+xml">
+<link rel="canonical" href="https://nashubs.duconmang.io.vn/security/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&amp;display=swap">
+<style>
+body{margin:0;background:#F7F6F2;font-family:'Be Vietnam Pro',sans-serif;color:#1D2433;font-size:17px;line-height:1.65}
+*{box-sizing:border-box}a{color:#0E7C86}a:focus-visible{outline:3px solid #3157E8;outline-offset:3px}
+.d{font-family:'Bricolage Grotesque',sans-serif;font-variation-settings:'wdth' 82}
+.bar{background:#1D2433;font-size:14px}.bar div{max-width:820px;margin:0 auto;padding:10px 24px;display:flex;flex-wrap:wrap;gap:4px 20px;justify-content:space-between}
+.bar a{color:#fff;text-decoration:none;font-weight:600}
+main{max-width:820px;margin:0 auto;padding:56px 24px 80px}
+h1{margin:0;font-size:clamp(36px,5vw,56px);line-height:1.02;font-weight:770;letter-spacing:-.03em}
+h2{margin:56px 0 0;font-size:30px;line-height:1.1;font-weight:740;letter-spacing:-.02em;padding-top:28px;border-top:1px solid #DEDAD1}
+h3{margin:28px 0 4px;font-size:19px}p{margin:0;color:#3A4252}.upd{margin-top:10px;font-size:14px;color:#5F6676}
+footer{border-top:1px solid #DEDAD1;font-size:14px;color:#5F6676}footer div{max-width:820px;margin:0 auto;padding:24px}
+</style>
+</head>
+<body>
+<div class="bar"><div><a href="/">← Về NasHubs</a><a href="https://duconmang.io.vn/">duconmang.io.vn</a></div></div>
+<main>
+<h1 class="d">Cam kết bảo mật</h1>
+<p class="upd">Cập nhật 17/11/2026 · <a href="#en">English</a></p>
+<h3>Mật khẩu trong kho khóa của thiết bị</h3>
+<p>Thông tin đăng nhập NAS nằm trong Keychain hoặc Android Keystore, được mã hóa ở cấp thiết bị và không rời khỏi máy bạn.</p>
+<h3>Kênh Agent Ed25519 + TLS</h3>
+<p>NasHubs Agent xác thực mọi yêu cầu bằng chữ ký Ed25519 và mã hóa đường truyền bằng TLS, có ghim chứng chỉ.</p>
+<h3>Xác nhận Pro được ký số</h3>
+<p>Mỗi xác nhận Pro được ký ECDSA P-256 bằng khóa phần cứng của thiết bị duyệt; ứng dụng tự kiểm chữ ký trước khi mở Pro.</p>
+<h3>Không thu thập nội dung</h3>
+<p>Chúng tôi không đọc, sao chép hay tải lên tệp và ảnh trên NAS của bạn.</p>
+<h3>Tối thiểu hóa dữ liệu</h3>
+<p>Chỉ lưu e-mail, mã tài khoản và trạng thái yêu cầu Pro. Không bán dữ liệu, không quảng cáo, không theo dõi bên thứ ba.</p>
+<h3>Bạn kiểm soát</h3>
+<p>Đăng xuất để xóa phiên khỏi thiết bị, hoặc xóa tài khoản NasHubs bất cứ lúc nào.</p>
+<h2 id="en" class="d" lang="en">Security commitment</h2>
+<div lang="en"><h3>Credentials in the device secure store</h3>
+<p>NAS credentials live in the Keychain or Android Keystore, encrypted at device level, and never leave your device.</p>
+<h3>Ed25519 + TLS Agent channel</h3>
+<p>The NasHubs Agent authenticates every request with Ed25519 signatures and encrypts traffic with TLS, with certificate pinning.</p>
+<h3>Signed Pro approvals</h3>
+<p>Each Pro approval is signed with ECDSA P-256 by the approving device's hardware key; the app verifies the signature before unlocking Pro.</p>
+<h3>No content collection</h3>
+<p>We do not read, copy or upload the files and photos on your NAS.</p>
+<h3>Data minimisation</h3>
+<p>We keep only your e-mail, account identifier and Pro request status. No data selling, no ads, no third-party tracking.</p>
+<h3>You are in control</h3>
+<p>Sign out to clear the session from your device, or delete your NasHubs account at any time.</p>
+</div>
+<p style="margin-top:40px"><a href="/privacy/">Quyền riêng tư · Privacy policy</a></p>
+</main>
+<footer><div>© 2026 NasHubs · duconmang43@gmail.com · Không liên kết với Synology</div></footer>
+</body>
+</html>
