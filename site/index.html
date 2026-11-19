@@ -1,20 +1,31 @@
 <!doctype html>
-<html lang="vi">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NasHubs: quản lý Synology NAS từ điện thoại, miễn phí</title>
-<meta name="description" content="NasHubs: quản lý Synology NAS từ Android, iPhone và iPad. Bảng điều khiển, tệp, Docker, Agent và truy cập từ xa. Miễn phí, Pro chỉ cần gửi yêu cầu.">
+<title>NasHubs – Free Synology NAS Manager for Android &amp; iPhone (Docker, Files, Remote Access)</title>
+<meta name="description" content="Manage your Synology NAS from Android, iPhone and iPad: live dashboard, files, Docker containers, users and secure remote access without opening ports. Free, no ads, no tracking.">
 <meta name="theme-color" content="#1D2433">
-<link rel="icon" href="assets/nashubs.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="assets/nashubs-180.png">
+<link rel="icon" href="/assets/nashubs.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/nashubs-180.png">
 <link rel="canonical" href="https://nashubs.duconmang.io.vn/">
+<link rel="alternate" hreflang="en" href="https://nashubs.duconmang.io.vn/">
+<link rel="alternate" hreflang="vi" href="https://nashubs.duconmang.io.vn/vi/">
+<link rel="alternate" hreflang="x-default" href="https://nashubs.duconmang.io.vn/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="NasHubs">
-<meta property="og:description" content="Quản lý Synology NAS từ điện thoại. Miễn phí, Pro chỉ cần gửi yêu cầu.">
+<meta property="og:site_name" content="NasHubs">
+<meta property="og:title" content="NasHubs – your Synology NAS in your pocket">
+<meta property="og:description" content="Free Synology NAS manager for Android and iPhone: dashboard, files, Docker and remote access. No cloud relay, no tracking.">
 <meta property="og:url" content="https://nashubs.duconmang.io.vn/">
 <meta property="og:image" content="https://nashubs.duconmang.io.vn/assets/og.jpg">
-<meta property="og:locale" content="vi_VN">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="vi_VN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="NasHubs – free Synology NAS manager for Android &amp; iPhone">
+<meta name="twitter:description" content="Dashboard, files, Docker and remote access for your Synology NAS. No cloud relay, no ads, no tracking.">
+<meta name="twitter:image" content="https://nashubs.duconmang.io.vn/assets/og.jpg">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "NasHubs", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Android 9+, iOS, iPadOS", "softwareVersion": "2.1.2", "description": "Free Synology NAS manager for Android, iPhone and iPad: live dashboard, file manager, Docker containers, users, storage and secure remote access through NasHubs Agent. No cloud relay, no ads, no tracking.", "url": "https://nashubs.duconmang.io.vn/", "downloadUrl": "https://github.com/duconmang-io/NasHubs/releases/download/v2.1.2/NasHubs-2.1.2.apk", "installUrl": "https://apps.apple.com/app/nashubs/id6771762112", "image": "https://nashubs.duconmang.io.vn/assets/og.jpg", "screenshot": ["https://nashubs.duconmang.io.vn/assets/screens/dashboard.jpg", "https://nashubs.duconmang.io.vn/assets/screens/files.jpg", "https://nashubs.duconmang.io.vn/assets/screens/miniapps.jpg", "https://nashubs.duconmang.io.vn/assets/screens/agent.jpg"], "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "author": {"@type": "Person", "name": "duconmang", "url": "https://duconmang.io.vn/"}, "inLanguage": ["en", "vi"]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is NasHubs really free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. NasHubs sells no plans and asks for no payment details. Pro features unlock for free: sign in with Google in the app, tap Request Pro, and they open once the request is approved."}}, {"@type": "Question", "name": "Is NasHubs an official Synology app?", "acceptedAnswer": {"@type": "Answer", "text": "No. NasHubs is an independent app that talks to your NAS through DSM's own web API. It is not affiliated with or endorsed by Synology Inc."}}, {"@type": "Question", "name": "Does my data go through a NasHubs server?", "acceptedAnswer": {"@type": "Answer", "text": "No. Your phone connects straight to your NAS on your network, your own domain, or through NasHubs Agent over Cloudflare Tunnel or Tailscale. Files, photos and admin commands never pass through a NasHubs server."}}, {"@type": "Question", "name": "Which Synology models and DSM versions work?", "acceptedAnswer": {"@type": "Answer", "text": "NasHubs is built for DSM 7 and tested on Synology DS918+. Most models that run DSM 7 work; Container Manager features need a model that supports it."}}, {"@type": "Question", "name": "Can I manage Docker containers from my phone?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. NasHubs lists your containers and packages, starts and stops them, and installs popular self-hosted apps such as Jellyfin, Immich and Pi-hole."}}, {"@type": "Question", "name": "How do I access my NAS remotely without opening ports?", "acceptedAnswer": {"@type": "Answer", "text": "Install NasHubs Agent on the NAS. It signs every command with Ed25519 over pinned TLS and reaches you through Cloudflare Tunnel or Tailscale, so no router ports need to be opened."}}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&amp;display=swap">
 <style>
@@ -51,6 +62,7 @@ img{max-width:100%}
 .sig{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;background-image:linear-gradient(rgba(29,36,51,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(29,36,51,.055) 1px,transparent 1px);background-size:40px 40px;background-position:-1px -1px}
 .sg{position:absolute;opacity:.8;display:none}
 .step{display:flex;gap:20px;padding:28px 0;border-top:1px solid #3A4458}
+.faq details{padding:20px 0;border-top:1px solid #DEDAD1}.faq details:last-child{border-bottom:1px solid #DEDAD1}.faq summary{cursor:pointer;font-weight:700;font-size:19px}.faq p{margin:10px 0 0;color:#3A4252;max-width:44em}
 .step b.n{flex:none;width:44px;height:44px;border-radius:50%;border:1.5px solid #6FD3DB;color:#9FE3E8;display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-size:20px}
 @media (prefers-reduced-motion:no-preference){
 .sg{display:block;animation-timing-function:linear;animation-iteration-count:infinite}
@@ -85,24 +97,24 @@ img{max-width:100%}
 
 <div class="home-bar">
 <div class="wrap" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 16px; min-height: 40px">
-<a href="https://duconmang.io.vn/">← Về trang chủ duconmang.io.vn</a>
-<span style="color: #A9B0BE">Một sản phẩm của duconmang</span>
+<a href="https://duconmang.io.vn/">← duconmang.io.vn</a>
+<span style="display: flex; gap: 16px; align-items: center"><span style="color: #A9B0BE">An independent app by duconmang</span><a href="/vi/" hreflang="vi" lang="vi">Tiếng Việt</a></span>
 </div>
 </div>
 
 <header style="border-bottom: 1px solid #DEDAD1">
-<nav aria-label="Chính" class="wrap" style="padding-top: 18px; padding-bottom: 18px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 32px">
+<nav aria-label="Main" class="wrap" style="padding-top: 18px; padding-bottom: 18px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 32px">
 <a href="#top" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: #1D2433">
-<img src="assets/nashubs.svg" alt="" style="width: 40px; height: 40px">
+<img src="/assets/nashubs.svg" alt="" style="width: 40px; height: 40px">
 <span class="d" style="font-size: 26px; font-weight: 760; letter-spacing: -0.02em">Nas<span style="color: #0E7C86">Hubs</span></span>
 </a>
 <div class="navlinks" style="display: flex; flex-wrap: wrap; gap: 4px 24px; flex: 1 1 auto; font-size: 15px; font-weight: 500">
-<a href="#tinh-nang" style="text-decoration: none; padding: 10px 0">Tính năng</a>
-<a href="#pro" style="text-decoration: none; padding: 10px 0">Pro miễn phí</a>
-<a href="#bao-mat" style="text-decoration: none; padding: 10px 0">Bảo mật</a>
-<a href="privacy/" style="text-decoration: none; padding: 10px 0">Quyền riêng tư</a>
+<a href="#features" style="text-decoration: none; padding: 10px 0">Features</a>
+<a href="#pro" style="text-decoration: none; padding: 10px 0">Free Pro</a>
+<a href="#privacy" style="text-decoration: none; padding: 10px 0">Privacy</a>
+<a href="#faq" style="text-decoration: none; padding: 10px 0">FAQ</a>
 </div>
-<a href="#tai-ve" class="btn solid sm">Tải về</a>
+<a href="#download" class="btn solid sm">Download</a>
 </nav>
 </header>
 
@@ -110,127 +122,137 @@ img{max-width:100%}
 
 <section class="wrap" style="padding-top: 64px; padding-bottom: 72px; display: flex; flex-wrap: wrap; align-items: center; gap: 56px">
 <div style="flex: 1 1 480px; min-width: 0">
-<p class="in" style="margin: 0 0 20px"><span class="tag pro" style="font-size: 14px"><span class="led" style="width: 8px; height: 8px; border-radius: 50%; background: #1FA968"></span>Miễn phí · Android, iPhone, iPad</span></p>
-<h1 class="d in" style="--d: .1s; margin: 0; font-size: clamp(44px, 6.2vw, 82px); line-height: 0.98; font-weight: 780; letter-spacing: -0.035em; max-width: 13ch">Synology NAS của bạn, gọn trong điện thoại.</h1>
-<p class="in" style="--d: .25s; margin: 28px 0 0; font-size: 20px; line-height: 1.55; color: #3A4252; max-width: 33em">Xem tài nguyên, mở tệp, quản lý Docker và người dùng, bật truy cập từ xa qua NasHubs Agent. Điện thoại nói chuyện thẳng với NAS, không qua máy chủ trung gian nào.</p>
+<p class="in" style="margin: 0 0 20px"><span class="tag pro" style="font-size: 14px"><span class="led" style="width: 8px; height: 8px; border-radius: 50%; background: #1FA968"></span>Free · Android, iPhone, iPad</span></p>
+<h1 class="d in" style="--d: .1s; margin: 0; font-size: clamp(44px, 6.2vw, 82px); line-height: 0.98; font-weight: 780; letter-spacing: -0.035em; max-width: 13ch">Your Synology NAS, in your pocket.</h1>
+<p class="in" style="--d: .25s; margin: 28px 0 0; font-size: 20px; line-height: 1.55; color: #3A4252; max-width: 33em">A free Synology NAS manager for Android and iPhone. Watch CPU, RAM and storage, browse files, run Docker containers, manage users and reach your NAS from anywhere through NasHubs Agent. Your phone talks straight to your NAS, with no cloud relay in between.</p>
 <div class="in" style="--d: .4s; display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px">
-<a href="https://github.com/duconmang-io/NasHubs/releases/download/v2.1.2/NasHubs-2.1.2.apk" class="btn teal">Tải cho Android</a>
+<a href="https://github.com/duconmang-io/NasHubs/releases/download/v2.1.2/NasHubs-2.1.2.apk" class="btn teal">Download for Android</a>
 <a href="https://apps.apple.com/app/nashubs/id6771762112" class="btn line">App Store</a>
 </div>
-<p class="in" style="--d: .5s; margin: 16px 0 0; font-size: 14px; color: #5F6676">Android 2.1.2 · 19 MB · Android 9 trở lên</p>
+<p class="in" style="--d: .5s; margin: 16px 0 0; font-size: 14px; color: #5F6676">Android 2.1.2 · 19 MB · Android 9 or later · also on the App Store</p>
 </div>
 <div style="flex: 1 1 380px; min-width: 0; display: flex; justify-content: center; gap: 22px; align-items: flex-end">
-<div class="phone in" style="--d: .3s; flex: 0 1 260px"><img src="assets/screens/dashboard.jpg" alt="Màn Tổng quan của NasHubs: CPU, RAM, dung lượng, nhiệt độ và trạng thái truy cập từ xa của một Synology DS918+"></div>
-<div class="phone in" style="--d: .45s; flex: 0 1 210px; margin-bottom: 40px"><img src="assets/screens/devices.jpg" alt="Danh sách NAS đã lưu trong NasHubs với kết nối nội bộ và tên miền riêng"></div>
+<div class="phone in" style="--d: .3s; flex: 0 1 260px"><img src="/assets/screens/dashboard.jpg" alt="NasHubs dashboard showing CPU, RAM, storage, temperature and remote access status of a Synology DS918+"></div>
+<div class="phone in" style="--d: .45s; flex: 0 1 210px; margin-bottom: 40px"><img src="/assets/screens/devices.jpg" alt="Saved NAS devices in NasHubs with local and custom-domain connections"></div>
 </div>
 </section>
 
-<section id="tinh-nang" class="wrap" style="padding-top: 48px; padding-bottom: 96px">
-<h2 class="d rv" style="margin: 0 0 12px; font-size: clamp(36px, 4.4vw, 56px); line-height: 1.02; font-weight: 760; letter-spacing: -0.03em">Mọi việc quản trị NAS hằng ngày</h2>
-<p class="rv" style="margin: 0 0 40px; color: #3A4252; max-width: 40em">Phần đánh dấu <strong>Pro</strong> mở khi bạn gửi yêu cầu và được xác nhận. Pro cũng miễn phí.</p>
+<section id="features" class="wrap" style="padding-top: 48px; padding-bottom: 96px">
+<h2 class="d rv" style="margin: 0 0 12px; font-size: clamp(36px, 4.4vw, 56px); line-height: 1.02; font-weight: 760; letter-spacing: -0.03em">Everyday Synology admin, from your phone</h2>
+<p class="rv" style="margin: 0 0 40px; color: #3A4252; max-width: 40em">Features marked <strong>Pro</strong> unlock once you request them and the request is approved. Pro is free too.</p>
 <div class="grid6">
 <article class="sheet card rv" style="--f: 40px; grid-column: span 2"><div class="fold" style="background: #DEDAD1"></div>
-<span class="tag free">Miễn phí</span>
-<h3 class="d" style="margin: 0; font-size: 28px; font-weight: 740; letter-spacing: -0.02em; line-height: 1.1">Tổng quan</h3>
-<p style="margin: 0; color: #3A4252">CPU, RAM, dung lượng, nhiệt độ, dịch vụ đang chạy và thời gian hoạt động của NAS, cập nhật trực tiếp.</p>
+<span class="tag free">Free</span>
+<h3 class="d" style="margin: 0; font-size: 28px; font-weight: 740; letter-spacing: -0.02em; line-height: 1.1">Dashboard</h3>
+<p style="margin: 0; color: #3A4252">Live CPU, RAM, storage, temperature, running services and uptime for your NAS.</p>
 </article>
 <article class="sheet card rv" style="--f: 40px; grid-column: span 2"><div class="fold" style="background: #DEDAD1"></div>
-<span class="tag free">Miễn phí</span>
-<h3 class="d" style="margin: 0; font-size: 28px; font-weight: 740; letter-spacing: -0.02em; line-height: 1.1">Tệp</h3>
-<p style="margin: 0; color: #3A4252">Duyệt thư mục chia sẻ, tải lên, tải xuống, đổi tên, chia sẻ liên kết. Mở thẳng tệp NAS từ ứng dụng Tệp của máy.</p>
+<span class="tag free">Free</span>
+<h3 class="d" style="margin: 0; font-size: 28px; font-weight: 740; letter-spacing: -0.02em; line-height: 1.1">Files</h3>
+<p style="margin: 0; color: #3A4252">Browse shared folders, upload, download, rename and create share links. Open NAS files right from your phone’s Files app.</p>
 </article>
 <article class="sheet card rv" style="--f: 40px; grid-column: span 2"><div class="fold" style="background: #0B5F67"></div>
 <span class="tag pro">Pro</span>
-<h3 class="d" style="margin: 0; font-size: 28px; font-weight: 740; letter-spacing: -0.02em; line-height: 1.1; color: #0E7C86">Nhiều NAS</h3>
-<p style="margin: 0; color: #3A4252">Lưu nhiều thiết bị, chuyển qua lại bằng một chạm. Mỗi NAS nhớ địa chỉ nội bộ và tên miền riêng.</p>
+<h3 class="d" style="margin: 0; font-size: 28px; font-weight: 740; letter-spacing: -0.02em; line-height: 1.1; color: #0E7C86">Multiple NAS</h3>
+<p style="margin: 0; color: #3A4252">Save several devices and switch with one tap. Each NAS remembers its local address and its own domain.</p>
 </article>
 <article class="sheet card rv" style="--f: 40px; grid-column: span 2"><div class="fold" style="background: #0B5F67"></div>
 <span class="tag pro">Pro</span>
-<h3 class="d" style="margin: 0; font-size: 28px; font-weight: 740; letter-spacing: -0.02em; line-height: 1.1; color: #0E7C86">Ứng dụng &amp; Docker</h3>
-<p style="margin: 0; color: #3A4252">Xem, bật, tắt container và gói cài đặt. Cài nhanh các ứng dụng tự host như Jellyfin, Immich, Pi-hole.</p>
+<h3 class="d" style="margin: 0; font-size: 28px; font-weight: 740; letter-spacing: -0.02em; line-height: 1.1; color: #0E7C86">Apps &amp; Docker</h3>
+<p style="margin: 0; color: #3A4252">See, start and stop containers and packages. Install self-hosted apps such as Jellyfin, Immich and Pi-hole in a few taps.</p>
 </article>
 <article class="sheet card rv" style="--f: 40px; grid-column: span 2"><div class="fold" style="background: #0B5F67"></div>
 <span class="tag pro">Pro</span>
-<h3 class="d" style="margin: 0; font-size: 28px; font-weight: 740; letter-spacing: -0.02em; line-height: 1.1; color: #0E7C86">Agent &amp; từ xa</h3>
-<p style="margin: 0; color: #3A4252">NasHubs Agent chạy trên NAS, ký mọi lệnh bằng Ed25519 qua TLS. Truy cập từ xa qua Cloudflare hoặc Tailscale, không mở cổng.</p>
+<h3 class="d" style="margin: 0; font-size: 28px; font-weight: 740; letter-spacing: -0.02em; line-height: 1.1; color: #0E7C86">Agent &amp; remote access</h3>
+<p style="margin: 0; color: #3A4252">NasHubs Agent runs on your NAS and signs every command with Ed25519 over TLS. Reach it remotely through Cloudflare Tunnel or Tailscale, with no open ports.</p>
 </article>
 <article class="sheet card rv" style="--f: 40px; grid-column: span 2"><div class="fold" style="background: #0B5F67"></div>
 <span class="tag pro">Pro</span>
-<h3 class="d" style="margin: 0; font-size: 28px; font-weight: 740; letter-spacing: -0.02em; line-height: 1.1; color: #0E7C86">Quản trị</h3>
-<p style="margin: 0; color: #3A4252">Ổ đĩa và lưu trữ, giám sát tài nguyên, nhật ký, người dùng và nhóm, thư mục chia sẻ, thiết bị USB, Media và Photos.</p>
+<h3 class="d" style="margin: 0; font-size: 28px; font-weight: 740; letter-spacing: -0.02em; line-height: 1.1; color: #0E7C86">Admin</h3>
+<p style="margin: 0; color: #3A4252">Disks and storage pools, resource monitor, logs, users and groups, shared folders, USB devices, media and photos.</p>
 </article>
 </div>
 </section>
 
-<section aria-label="Ảnh màn hình" style="padding-bottom: 88px">
+<section aria-label="Screenshots" style="padding-bottom: 88px">
 <div class="shots">
-<figure><div class="phone"><img src="assets/screens/files.jpg" alt="Màn Tệp liệt kê các thư mục chia sẻ trên NAS" loading="lazy"></div><figcaption>Tệp<span>Thư mục chia sẻ trên NAS</span></figcaption></figure>
-<figure><div class="phone"><img src="assets/screens/miniapps.jpg" alt="Danh sách ứng dụng tự host như Prowlarr, Immich, Jellyfin, Pi-hole" loading="lazy"></div><figcaption>Ứng dụng<span>Cài và mở dịch vụ tự host</span></figcaption></figure>
-<figure><div class="phone"><img src="assets/screens/agent.jpg" alt="Thông tin NasHubs Agent: trực tuyến, Ed25519 và TLS pin, cổng 8443" loading="lazy"></div><figcaption>NasHubs Agent<span>Ed25519 + TLS pin</span></figcaption></figure>
-<figure><div class="phone"><img src="assets/screens/settings.jpg" alt="Màn Cài đặt với truy cập từ xa, Media Stack, giao diện và ngôn ngữ" loading="lazy"></div><figcaption>Cài đặt<span>Từ xa, giao diện, ngôn ngữ</span></figcaption></figure>
-<figure><div class="phone"><img src="assets/screens/dashboard-dark.jpg" alt="Màn Tổng quan ở giao diện tối" loading="lazy"></div><figcaption>Giao diện tối<span>Theo hệ thống hoặc tự chọn</span></figcaption></figure>
+<figure><div class="phone"><img src="/assets/screens/files.jpg" alt="Files screen listing the shared folders on a Synology NAS" loading="lazy"></div><figcaption>Files<span>Shared folders on your NAS</span></figcaption></figure>
+<figure><div class="phone"><img src="/assets/screens/miniapps.jpg" alt="Self-hosted apps such as Prowlarr, Immich, Jellyfin and Pi-hole" loading="lazy"></div><figcaption>Apps<span>Install and open self-hosted services</span></figcaption></figure>
+<figure><div class="phone"><img src="/assets/screens/agent.jpg" alt="NasHubs Agent details: online, Ed25519 with pinned TLS, port 8443" loading="lazy"></div><figcaption>NasHubs Agent<span>Ed25519 + pinned TLS</span></figcaption></figure>
+<figure><div class="phone"><img src="/assets/screens/settings.jpg" alt="Settings with remote access, media stack, theme and language" loading="lazy"></div><figcaption>Settings<span>Remote access, theme, language</span></figcaption></figure>
+<figure><div class="phone"><img src="/assets/screens/dashboard-dark.jpg" alt="Dashboard in dark mode" loading="lazy"></div><figcaption>Dark mode<span>Follows the system or your choice</span></figcaption></figure>
 </div>
 </section>
 
 <section id="pro" style="background: #1D2433; color: #ECEAE4">
 <div class="wrap" style="padding-top: 104px; padding-bottom: 104px; display: flex; flex-wrap: wrap; gap: 48px 72px">
 <div style="flex: 1 1 340px; max-width: 460px">
-<h2 class="d" style="margin: 0; font-size: clamp(40px, 5vw, 64px); line-height: 1; font-weight: 780; letter-spacing: -0.035em; color: #FFFFFF">Pro là miễn phí. Chỉ cần gửi yêu cầu.</h2>
-<p style="margin: 24px 0 0; color: #A9B0BE">NasHubs không bán gói nào. Không thanh toán, không nhập key. Mỗi tài khoản Google gửi một yêu cầu, tác giả xác nhận là toàn bộ tính năng Pro mở ra trên mọi máy đăng nhập cùng tài khoản.</p>
+<h2 class="d" style="margin: 0; font-size: clamp(40px, 5vw, 64px); line-height: 1; font-weight: 780; letter-spacing: -0.035em; color: #FFFFFF">Pro is free. Just ask for it.</h2>
+<p style="margin: 24px 0 0; color: #A9B0BE">NasHubs sells nothing: no subscription, no payment, no license key. Each Google account sends one request; once the developer approves it, every Pro feature unlocks on all your devices signed in with that account.</p>
 </div>
 <ol style="flex: 999 1 520px; min-width: 0; list-style: none; margin: 0; padding: 0">
-<li class="step rv"><b class="n">1</b><div><h3 style="margin: 0; font-size: 22px; font-weight: 700; color: #FFFFFF">Đăng nhập Google</h3><p style="margin: 6px 0 0; color: #A9B0BE">Trong ứng dụng, mở Tài khoản NasHubs và đăng nhập bằng tài khoản Google đã xác minh e-mail.</p></div></li>
-<li class="step rv"><b class="n">2</b><div><h3 style="margin: 0; font-size: 22px; font-weight: 700; color: #FFFFFF">Gửi yêu cầu Pro/VIP</h3><p style="margin: 6px 0 0; color: #A9B0BE">Bấm một nút. Yêu cầu gắn với tài khoản của bạn, không cần ghi chú hay mã nào.</p></div></li>
-<li class="step rv" style="border-bottom: 1px solid #3A4458"><b class="n">3</b><div><h3 style="margin: 0; font-size: 22px; font-weight: 700; color: #FFFFFF">Được xác nhận, Pro mở</h3><p style="margin: 6px 0 0; color: #A9B0BE">Xác nhận được ký số và ứng dụng tự kiểm chữ ký. Đã mở thì nhớ trên máy, mất mạng vẫn dùng được.</p></div></li>
+<li class="step rv"><b class="n">1</b><div><h3 style="margin: 0; font-size: 22px; font-weight: 700; color: #FFFFFF">Sign in with Google</h3><p style="margin: 6px 0 0; color: #A9B0BE">In the app, open NasHubs Account and sign in with a Google account that has a verified e-mail.</p></div></li>
+<li class="step rv"><b class="n">2</b><div><h3 style="margin: 0; font-size: 22px; font-weight: 700; color: #FFFFFF">Tap Request Pro</h3><p style="margin: 6px 0 0; color: #A9B0BE">One tap. The request is tied to your account; no note or code needed.</p></div></li>
+<li class="step rv" style="border-bottom: 1px solid #3A4458"><b class="n">3</b><div><h3 style="margin: 0; font-size: 22px; font-weight: 700; color: #FFFFFF">Approved, Pro unlocks</h3><p style="margin: 6px 0 0; color: #A9B0BE">The approval is digitally signed and the app verifies it. Once unlocked, it stays unlocked, even offline.</p></div></li>
 </ol>
 </div>
 </section>
 
-<section id="bao-mat" class="wrap" style="padding-top: 104px; padding-bottom: 96px; display: flex; flex-wrap: wrap; gap: 40px 72px">
-<h2 class="d rv" style="margin: 0; flex: 1 1 320px; font-size: clamp(36px, 4.4vw, 56px); line-height: 1.02; font-weight: 760; letter-spacing: -0.03em; max-width: 9ch">Dữ liệu NAS ở lại với bạn</h2>
+<section id="privacy" class="wrap" style="padding-top: 104px; padding-bottom: 96px; display: flex; flex-wrap: wrap; gap: 40px 72px">
+<h2 class="d rv" style="margin: 0; flex: 1 1 320px; font-size: clamp(36px, 4.4vw, 56px); line-height: 1.02; font-weight: 760; letter-spacing: -0.03em; max-width: 9ch">Your NAS data stays yours</h2>
 <div style="flex: 999 1 560px; min-width: 0">
-<div class="rv" style="padding: 24px 0; border-top: 1px solid #DEDAD1"><h3 style="margin: 0; font-size: 21px; font-weight: 700">Mật khẩu nằm trong kho khóa của máy</h3><p style="margin: 6px 0 0; color: #3A4252">Địa chỉ, tài khoản và mật khẩu NAS lưu trong Keychain (iOS) hoặc Android Keystore, chỉ dùng để kết nối NAS.</p></div>
-<div class="rv" style="padding: 24px 0; border-top: 1px solid #DEDAD1"><h3 style="margin: 0; font-size: 21px; font-weight: 700">Đi thẳng tới NAS</h3><p style="margin: 6px 0 0; color: #3A4252">Tệp, ảnh và lệnh quản trị đi trực tiếp giữa điện thoại và NAS. Tác giả không đọc được NAS của bạn.</p></div>
-<div class="rv" style="padding: 24px 0; border-top: 1px solid #DEDAD1; border-bottom: 1px solid #DEDAD1"><h3 style="margin: 0; font-size: 21px; font-weight: 700">Chỉ lưu thứ cần thiết</h3><p style="margin: 6px 0 0; color: #3A4252">Tài khoản NasHubs chỉ giữ e-mail, mã tài khoản và trạng thái yêu cầu Pro. Không quảng cáo, không công cụ phân tích. <a href="security/">Cam kết bảo mật</a></p></div>
+<div class="rv" style="padding: 24px 0; border-top: 1px solid #DEDAD1"><h3 style="margin: 0; font-size: 21px; font-weight: 700">Credentials stay in your phone’s keystore</h3><p style="margin: 6px 0 0; color: #3A4252">NAS addresses, accounts and passwords live in the iOS Keychain or Android Keystore and are used only to connect to your NAS.</p></div>
+<div class="rv" style="padding: 24px 0; border-top: 1px solid #DEDAD1"><h3 style="margin: 0; font-size: 21px; font-weight: 700">Straight to your NAS</h3><p style="margin: 6px 0 0; color: #3A4252">Files, photos and admin commands travel directly between your phone and your NAS. The developer cannot see your NAS.</p></div>
+<div class="rv" style="padding: 24px 0; border-top: 1px solid #DEDAD1; border-bottom: 1px solid #DEDAD1"><h3 style="margin: 0; font-size: 21px; font-weight: 700">Only what is needed</h3><p style="margin: 6px 0 0; color: #3A4252">A NasHubs account keeps only your e-mail, account ID and Pro request status. No ads, no analytics SDKs. <a href="/security/">Security commitments</a> · <a href="/privacy/#en">Privacy policy</a></p></div>
 </div>
 </section>
 
-<section id="tai-ve" style="background: rgba(239, 237, 231, 0.85); border-top: 1px solid #DEDAD1">
+<section id="download" style="background: rgba(239, 237, 231, 0.85); border-top: 1px solid #DEDAD1">
 <div class="wrap" style="padding-top: 88px; padding-bottom: 88px">
-<h2 class="d rv" style="margin: 0 0 40px; font-size: clamp(36px, 4.4vw, 56px); line-height: 1.02; font-weight: 760; letter-spacing: -0.03em">Tải NasHubs</h2>
+<h2 class="d rv" style="margin: 0 0 40px; font-size: clamp(36px, 4.4vw, 56px); line-height: 1.02; font-weight: 760; letter-spacing: -0.03em">Download NasHubs</h2>
 <div class="grid6">
 <article class="sheet card rv" style="--f: 44px; grid-column: span 3; padding: 32px"><div class="fold" style="background: #0B5F67"></div>
 <div style="height: 6px; width: 64px; border-radius: 3px; background: #0E7C86"></div>
-<p style="margin: 0; font-size: 14px; color: #5F6676">Android 9 trở lên</p>
+<p style="margin: 0; font-size: 14px; color: #5F6676">Android 9 or later</p>
 <h3 class="d" style="margin: 0; font-size: 36px; font-weight: 760; letter-spacing: -0.03em; line-height: 1.05; color: #0E7C86">Android 2.1.2</h3>
-<p style="margin: 0; color: #3A4252">Tệp APK 19 MB. Mở tệp sau khi tải và cho phép cài từ nguồn này. Cài đè được lên bản preview trước đó.</p>
+<p style="margin: 0; color: #3A4252">A 19 MB APK. Open it after downloading and allow installs from this source. It installs over earlier versions and keeps your settings.</p>
 <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto; padding-top: 8px">
-<a href="https://github.com/duconmang-io/NasHubs/releases/download/v2.1.2/NasHubs-2.1.2.apk" class="btn teal sm">Tải NasHubs-2.1.2.apk</a>
-<a href="https://github.com/duconmang-io/NasHubs/releases/tag/v2.1.2" class="btn line sm">Ghi chú phát hành</a>
+<a href="https://github.com/duconmang-io/NasHubs/releases/download/v2.1.2/NasHubs-2.1.2.apk" class="btn teal sm">Download NasHubs-2.1.2.apk</a>
+<a href="https://github.com/duconmang-io/NasHubs/releases/tag/v2.1.2" class="btn line sm">Release notes</a>
 </div>
-<p style="margin: 0; font-size: 13px; color: #5F6676; word-break: break-all">SHA-256: c2a16477e9f5ab48bf921b8e39649293fad4dfb135c7d1093935bf6f3554202e</p>
+<p style="margin: 0; font-size: 13px; color: #5F6676; word-break: break-all">SHA-256: a42a2ab74bff6acb0c9e12a61f8d1f209b452dc4fb814741190a3aefb2a0f51a</p>
 </article>
 <article class="sheet card rv" style="--f: 44px; grid-column: span 3; padding: 32px"><div class="fold" style="background: #DEDAD1"></div>
 <div style="height: 6px; width: 64px; border-radius: 3px; background: #1D2433"></div>
 <p style="margin: 0; font-size: 14px; color: #5F6676">iPhone, iPad, Mac</p>
 <h3 class="d" style="margin: 0; font-size: 36px; font-weight: 760; letter-spacing: -0.03em; line-height: 1.05">App Store</h3>
-<p style="margin: 0; color: #3A4252">Bản iOS đang có trên App Store. Bản cập nhật theo cách Pro miễn phí mới sẽ phát hành sau.</p>
+<p style="margin: 0; color: #3A4252">NasHubs is on the App Store for iPhone, iPad and Apple-silicon Macs. The update with free Pro follows soon.</p>
 <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto; padding-top: 8px">
-<a href="https://apps.apple.com/app/nashubs/id6771762112" class="btn solid sm">Mở App Store</a>
+<a href="https://apps.apple.com/app/nashubs/id6771762112" class="btn solid sm">Open the App Store</a>
 </div>
 </article>
 </div>
 </div>
 </section>
 
-<section id="lien-he" class="wrap" style="padding-top: 88px; padding-bottom: 88px; display: flex; flex-wrap: wrap; gap: 32px 72px; align-items: flex-end">
+<section id="faq" class="wrap faq" style="padding-top: 88px; padding-bottom: 24px">
+<h2 class="d" style="margin: 0 0 28px; font-size: clamp(32px, 4vw, 48px); line-height: 1.04; font-weight: 760; letter-spacing: -0.03em">Questions</h2>
+<details><summary>Is NasHubs really free?</summary><p>Yes. NasHubs sells no plans and asks for no payment details. Pro features unlock for free: sign in with Google in the app, tap Request Pro, and they open once the request is approved.</p></details>
+<details><summary>Is NasHubs an official Synology app?</summary><p>No. NasHubs is an independent app that talks to your NAS through DSM's own web API. It is not affiliated with or endorsed by Synology Inc.</p></details>
+<details><summary>Does my data go through a NasHubs server?</summary><p>No. Your phone connects straight to your NAS on your network, your own domain, or through NasHubs Agent over Cloudflare Tunnel or Tailscale. Files, photos and admin commands never pass through a NasHubs server.</p></details>
+<details><summary>Which Synology models and DSM versions work?</summary><p>NasHubs is built for DSM 7 and tested on Synology DS918+. Most models that run DSM 7 work; Container Manager features need a model that supports it.</p></details>
+<details><summary>Can I manage Docker containers from my phone?</summary><p>Yes. NasHubs lists your containers and packages, starts and stops them, and installs popular self-hosted apps such as Jellyfin, Immich and Pi-hole.</p></details>
+<details><summary>How do I access my NAS remotely without opening ports?</summary><p>Install NasHubs Agent on the NAS. It signs every command with Ed25519 over pinned TLS and reaches you through Cloudflare Tunnel or Tailscale, so no router ports need to be opened.</p></details>
+</section>
+
+<section id="contact" class="wrap" style="padding-top: 88px; padding-bottom: 88px; display: flex; flex-wrap: wrap; gap: 32px 72px; align-items: flex-end">
 <div style="flex: 1 1 420px; min-width: 0">
-<h2 class="d" style="margin: 0; font-size: clamp(32px, 4vw, 48px); line-height: 1.04; font-weight: 760; letter-spacing: -0.03em">Góp ý, báo lỗi</h2>
-<p style="margin: 14px 0 0; color: #3A4252; max-width: 34em">Gửi e-mail kèm model NAS, phiên bản DSM, phiên bản NasHubs và mô tả ngắn. Nếu Pro chưa mở sau khi gửi yêu cầu, ghi thêm e-mail Google bạn dùng trong ứng dụng.</p>
+<h2 class="d" style="margin: 0; font-size: clamp(32px, 4vw, 48px); line-height: 1.04; font-weight: 760; letter-spacing: -0.03em">Feedback &amp; bug reports</h2>
+<p style="margin: 14px 0 0; color: #3A4252; max-width: 34em">E-mail your NAS model, DSM version, NasHubs version and a short description. If Pro has not unlocked after your request, include the Google e-mail you use in the app.</p>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 12px">
 <a href="mailto:duconmang43@gmail.com" class="btn solid">duconmang43@gmail.com</a>
-<a href="https://duconmang.io.vn/" class="btn line">Các sản phẩm khác</a>
+<a href="https://duconmang.io.vn/" class="btn line">More apps</a>
 </div>
 </section>
 </main>
@@ -238,11 +260,11 @@ img{max-width:100%}
 <footer style="border-top: 1px solid #DEDAD1">
 <div class="wrap" style="padding-top: 28px; padding-bottom: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 14px; color: #5F6676">
 <p style="margin: 0">© 2026 NasHubs · <a href="https://duconmang.io.vn/" style="color: #5F6676">duconmang.io.vn</a></p>
-<p style="margin: 0"><a href="privacy/" style="color: #5F6676">Quyền riêng tư</a> · <a href="security/" style="color: #5F6676">Bảo mật</a> · Không liên kết với Synology</p>
+<p style="margin: 0"><a href="/privacy/#en" style="color: #5F6676">Privacy</a> · <a href="/security/" style="color: #5F6676">Security</a> · Not affiliated with Synology Inc. Synology and DSM are trademarks of Synology Inc.</p>
 </div>
 </footer>
 </div>
 <script src="/assets/stats.js" data-site="nashubs" defer></script>
-<script src="/assets/donate.js" data-qr-base="https://duconmang.io.vn/qr/" defer></script>
+<script src="/assets/donate.js" data-qr-base="https://duconmang.io.vn/qr/" data-lang="en" defer></script>
 </body>
 </html>

@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NasHubs: quản lý Synology NAS từ điện thoại, miễn phí</title>
+<meta name="description" content="NasHubs: quản lý Synology NAS từ Android, iPhone và iPad. Bảng điều khiển, tệp, Docker, Agent và truy cập từ xa. Miễn phí, Pro chỉ cần gửi yêu cầu.">
+<meta name="theme-color" content="#1D2433">
+<link rel="icon" href="/assets/nashubs.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/nashubs-180.png">
+<link rel="canonical" href="https://nashubs.duconmang.io.vn/vi/">
+<link rel="alternate" hreflang="en" href="https://nashubs.duconmang.io.vn/">
+<link rel="alternate" hreflang="vi" href="https://nashubs.duconmang.io.vn/vi/">
+<link rel="alternate" hreflang="x-default" href="https://nashubs.duconmang.io.vn/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="NasHubs">
+<meta property="og:description" content="Quản lý Synology NAS từ điện thoại. Miễn phí, Pro chỉ cần gửi yêu cầu.">
+<meta property="og:url" content="https://nashubs.duconmang.io.vn/vi/">
+<meta property="og:image" content="https://nashubs.duconmang.io.vn/assets/og.jpg">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:locale:alternate" content="en_US">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&amp;display=swap">
+<style>
+:root{--ink:#1D2433;--ink2:#3A4252;--muted:#5F6676;--paper:#F7F6F2;--rule:#DEDAD1;--teal:#0E7C86;--tealD:#0B5F67;--tealT:#E3F1F2}
+body{margin:0;background:var(--paper)}
+*{box-sizing:border-box}
+a{color:var(--ink)}a:hover{color:var(--teal)}
+a:focus-visible,button:focus-visible{outline:3px solid #3157E8;outline-offset:3px}
+img{max-width:100%}
+.d{font-family:'Bricolage Grotesque',sans-serif;font-variation-settings:'wdth' 82}
+.wrap{max-width:1200px;margin:0 auto;padding-left:24px;padding-right:24px}
+.btn{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 26px;border-radius:12px;font-weight:600;text-decoration:none}
+.btn.solid{background:var(--ink);color:#fff}.btn.solid:hover{background:#2C3549;color:#fff}
+.btn.teal{background:var(--teal);color:#fff}.btn.teal:hover{background:var(--tealD);color:#fff}
+.btn.line{border:1.5px solid var(--ink);color:var(--ink)}
+.btn.sm{min-height:46px;padding:0 20px;border-radius:10px;font-size:15px}
+.sheet{position:relative;clip-path:polygon(0 0,calc(100% - var(--f,44px)) 0,100% var(--f,44px),100% 100%,0 100%)}
+.fold{position:absolute;top:0;right:0;width:var(--f,44px);height:var(--f,44px);clip-path:polygon(0 0,0 100%,100% 100%);border-bottom-left-radius:10px}
+.card{background:#fff;border-radius:18px;padding:30px;display:flex;flex-direction:column;gap:12px;box-shadow:0 30px 60px -44px rgba(29,36,51,.5)}
+.grid6{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:24px}
+@media (max-width:900px){.grid6>*{grid-column:span 6 !important}}
+@media (min-width:901px) and (max-width:1100px){.grid6>*{grid-column:span 3 !important}}
+.tag{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;padding:3px 10px;border-radius:999px;font-size:13px;font-weight:600}
+.tag.free{background:#EEF0EC;color:var(--ink2)}.tag.pro{background:var(--tealT);color:var(--tealD)}
+.phone{position:relative;width:100%;aspect-ratio:600/1304;border-radius:34px;padding:10px;background:#1D2433;box-shadow:0 40px 70px -40px rgba(29,36,51,.75)}
+.phone img{display:block;width:100%;height:100%;object-fit:cover;border-radius:25px}
+.shots{display:flex;gap:24px;overflow-x:auto;padding:8px 24px 28px max(24px,calc((100vw - 1200px)/2 + 24px));scroll-snap-type:x mandatory;scrollbar-width:thin}
+.shots figure{flex:0 0 220px;margin:0;scroll-snap-align:start}
+.shots figcaption{margin-top:12px;font-size:15px;font-weight:600}
+.shots figcaption span{display:block;font-weight:400;font-size:14px;color:var(--muted)}
+@media (max-width:640px){.navlinks{display:none !important}nav.wrap{justify-content:space-between}}
+.home-bar{background:var(--ink);color:#ECEAE4;font-size:14px}
+.home-bar a{color:#fff;text-decoration:none;font-weight:600}.home-bar a:hover{color:#9FE3E8}
+.sig{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;background-image:linear-gradient(rgba(29,36,51,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(29,36,51,.055) 1px,transparent 1px);background-size:40px 40px;background-position:-1px -1px}
+.sg{position:absolute;opacity:.8;display:none}
+.step{display:flex;gap:20px;padding:28px 0;border-top:1px solid #3A4458}
+.step b.n{flex:none;width:44px;height:44px;border-radius:50%;border:1.5px solid #6FD3DB;color:#9FE3E8;display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-size:20px}
+@media (prefers-reduced-motion:no-preference){
+.sg{display:block;animation-timing-function:linear;animation-iteration-count:infinite}
+@keyframes sr{from{left:-80px}to{left:calc(100vw + 20px)}}
+@keyframes sl{from{left:calc(100vw + 20px)}to{left:-80px}}
+@keyframes sd{from{top:-80px}to{top:calc(100vh + 20px)}}
+@keyframes p1{0%{left:-20px;top:280px}45%{left:520px;top:280px}100%{left:520px;top:calc(100vh + 20px)}}
+@keyframes p2{0%{left:calc(100vw + 20px);top:640px}40%{left:880px;top:640px}100%{left:880px;top:-20px}}
+.sr{animation-name:sr}.sl{animation-name:sl}.sd{animation-name:sd}.p1{animation-name:p1}.p2{animation-name:p2}
+@keyframes rise{from{opacity:0;translate:0 28px}to{opacity:1;translate:0 0}}
+.in{animation:rise .7s cubic-bezier(.2,.8,.2,1) both;animation-delay:var(--d,0s)}
+@keyframes blink{0%,100%{opacity:.25}50%{opacity:1}}
+.led{animation:blink 1.6s ease-in-out infinite}
+@supports (animation-timeline:view()){
+@keyframes up{from{opacity:0;translate:0 60px}to{opacity:1;translate:0 0}}
+.rv{animation:up linear both;animation-timeline:view();animation-range:entry 0% entry 70%}
+}
+}
+</style>
+</head>
+<body>
+<div style="font-family: 'Be Vietnam Pro', sans-serif; color: #1D2433; position: relative; isolation: isolate; font-size: 17px; line-height: 1.6">
+<div class="sig" aria-hidden="true">
+<span class="sg sr" style="top: 159px; width: 64px; height: 3px; border-radius: 2px; background: linear-gradient(to right, rgba(0,0,0,0), #0E7C86); animation-duration: 11s; animation-delay: -2s"></span>
+<span class="sg sl" style="top: 399px; width: 64px; height: 3px; border-radius: 2px; background: linear-gradient(to left, rgba(0,0,0,0), #1FA968); animation-duration: 14s; animation-delay: -7s"></span>
+<span class="sg sr" style="top: 639px; width: 64px; height: 3px; border-radius: 2px; background: linear-gradient(to right, rgba(0,0,0,0), #F08A24); animation-duration: 13s; animation-delay: -4s"></span>
+<span class="sg sd" style="left: 319px; width: 3px; height: 64px; border-radius: 2px; background: linear-gradient(to bottom, rgba(0,0,0,0), #0E7C86); animation-duration: 10s; animation-delay: -3s"></span>
+<span class="sg sd" style="left: 999px; width: 3px; height: 64px; border-radius: 2px; background: linear-gradient(to bottom, rgba(0,0,0,0), #1FA968); animation-duration: 12s; animation-delay: -8s"></span>
+<span class="sg p1" style="width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%; background: #0E7C86; box-shadow: 0 0 10px 2px #0E7C86; animation-duration: 9s; animation-delay: -2s"></span>
+<span class="sg p2" style="width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%; background: #1FA968; box-shadow: 0 0 10px 2px #1FA968; animation-duration: 11s; animation-delay: -6s"></span>
+</div>
+
+<div class="home-bar">
+<div class="wrap" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 16px; min-height: 40px">
+<a href="https://duconmang.io.vn/">← Về trang chủ duconmang.io.vn</a>
+<span style="display: flex; gap: 16px; align-items: center"><span style="color: #A9B0BE">Một sản phẩm của duconmang</span><a href="/" hreflang="en" lang="en">English</a></span>
+</div>
+</div>
+
+<header style="border-bottom: 1px solid #DEDAD1">
+<nav aria-label="Chính" class="wrap" style="padding-top: 18px; padding-bottom: 18px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 32px">
+<a href="#top" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: #1D2433">
+<img src="/assets/nashubs.svg" alt="" style="width: 40px; height: 40px">
+<span class="d" style="font-size: 26px; font-weight: 760; letter-spacing: -0.02em">Nas<span style="color: #0E7C86">Hubs</span></span>
+</a>
+<div class="navlinks" style="display: flex; flex-wrap: wrap; gap: 4px 24px; flex: 1 1 auto; font-size: 15px; font-weight: 500">
+<a href="#tinh-nang" style="text-decoration: none; padding: 10px 0">Tính năng</a>
+<a href="#pro" style="text-decoration: none; padding: 10px 0">Pro miễn phí</a>
+<a href="#bao-mat" style="text-decoration: none; padding: 10px 0">Bảo mật</a>
+<a href="/privacy/" style="text-decoration: none; padding: 10px 0">Quyền riêng tư</a>
+</div>
+<a href="#tai-ve" class="btn solid sm">Tải về</a>
+</nav>
+</header>
+
+<main id="top">
+
+<section class="wrap" style="padding-top: 64px; padding-bottom: 72px; display: flex; flex-wrap: wrap; align-items: center; gap: 56px">
+<div style="flex: 1 1 480px; min-width: 0">
+<p class="in" style="margin: 0 0 20px"><span class="tag pro" style="font-size: 14px"><span class="led" style="width: 8px; height: 8px; border-radius: 50%; background: #1FA968"></span>Miễn phí · Android, iPhone, iPad</span></p>
+<h1 class="d in" style="--d: .1s; margin: 0; font-size: clamp(44px, 6.2vw, 82px); line-height: 0.98; font-weight: 780; letter-spacing: -0.035em; max-width: 13ch">Synology NAS của bạn, gọn trong điện thoại.</h1>
+<p class="in" style="--d: .25s; margin: 28px 0 0; font-size: 20px; line-height: 1.55; color: #3A4252; max-width: 33em">Xem tài nguyên, mở tệp, quản lý Docker và người dùng, bật truy cập từ xa qua NasHubs Agent. Điện thoại nói chuyện thẳng với NAS, không qua máy chủ trung gian nào.</p>
+<div class="in" style="--d: .4s; display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px">
+<a href="https://github.com/duconmang-io/NasHubs/releases/download/v2.1.2/NasHubs-2.1.2.apk" class="btn teal">Tải cho Android</a>
+<a href="https://apps.apple.com/app/nashubs/id6771762112" class="btn line">App Store</a>
+</div>
+<p class="in" style="--d: .5s; margin: 16px 0 0; font-size: 14px; color: #5F6676">Android 2.1.2 · 19 MB · Android 9 trở lên</p>
+</div>
+<div style="flex: 1 1 380px; min-width: 0; display: flex; justify-content: center; gap: 22px; align-items: flex-end">
+<div class="phone in" style="--d: .3s; flex: 0 1 260px"><img src="/assets/screens/dashboard.jpg" alt="Màn Tổng quan của NasHubs: CPU, RAM, dung lượng, nhiệt độ và trạng thái truy cập từ xa của một Synology DS918+"></div>
+<div class="phone in" style="--d: .45s; flex: 0 1 210px; margin-bottom: 40px"><img src="/assets/screens/devices.jpg" alt="Danh sách NAS đã lưu trong NasHubs với kết nối nội bộ và tên miền riêng"></div>
+</div>
+</section>
+
+<section id="tinh-nang" class="wrap" style="padding-top: 48px; padding-bottom: 96px">
+<h2 class="d rv" style="margin: 0 0 12px; font-size: clamp(36px, 4.4vw, 56px); line-height: 1.02; font-weight: 760; letter-spacing: -0.03em">Mọi việc quản trị NAS hằng ngày</h2>
+<p class="rv" style="margin: 0 0 40px; color: #3A4252; max-width: 40em">Phần đánh dấu <strong>Pro</strong> mở khi bạn gửi yêu cầu và được xác nhận. Pro cũng miễn phí.</p>
+<div class="grid6">
+<article class="sheet card rv" style="--f: 40px; grid-column: span 2"><div class="fold" style="background: #DEDAD1"></div>
+<span class="tag free">Miễn phí</span>
+<h3 class="d" style="margin: 0; font-size: 28px; font-weight: 740; letter-spacing: -0.02em; line-height: 1.1">Tổng quan</h3>
+<p style="margin: 0; color: #3A4252">CPU, RAM, dung lượng, nhiệt độ, dịch vụ đang chạy và thời gian hoạt động của NAS, cập nhật trực tiếp.</p>
+</article>
+<article class="sheet card rv" style="--f: 40px; grid-column: span 2"><div class="fold" style="background: #DEDAD1"></div>
+<span class="tag free">Miễn phí</span>
+<h3 class="d" style="margin: 0; font-size: 28px; font-weight: 740; letter-spacing: -0.02em; line-height: 1.1">Tệp</h3>
+<p style="margin: 0; color: #3A4252">Duyệt thư mục chia sẻ, tải lên, tải xuống, đổi tên, chia sẻ liên kết. Mở thẳng tệp NAS từ ứng dụng Tệp của máy.</p>
+</article>
+<article class="sheet card rv" style="--f: 40px; grid-column: span 2"><div class="fold" style="background: #0B5F67"></div>
+<span class="tag pro">Pro</span>
+<h3 class="d" style="margin: 0; font-size: 28px; font-weight: 740; letter-spacing: -0.02em; line-height: 1.1; color: #0E7C86">Nhiều NAS</h3>
+<p style="margin: 0; color: #3A4252">Lưu nhiều thiết bị, chuyển qua lại bằng một chạm. Mỗi NAS nhớ địa chỉ nội bộ và tên miền riêng.</p>
+</article>
+<article class="sheet card rv" style="--f: 40px; grid-column: span 2"><div class="fold" style="background: #0B5F67"></div>
+<span class="tag pro">Pro</span>
+<h3 class="d" style="margin: 0; font-size: 28px; font-weight: 740; letter-spacing: -0.02em; line-height: 1.1; color: #0E7C86">Ứng dụng &amp; Docker</h3>
+<p style="margin: 0; color: #3A4252">Xem, bật, tắt container và gói cài đặt. Cài nhanh các ứng dụng tự host như Jellyfin, Immich, Pi-hole.</p>
+</article>
+<article class="sheet card rv" style="--f: 40px; grid-column: span 2"><div class="fold" style="background: #0B5F67"></div>
+<span class="tag pro">Pro</span>
+<h3 class="d" style="margin: 0; font-size: 28px; font-weight: 740; letter-spacing: -0.02em; line-height: 1.1; color: #0E7C86">Agent &amp; từ xa</h3>
+<p style="margin: 0; color: #3A4252">NasHubs Agent chạy trên NAS, ký mọi lệnh bằng Ed25519 qua TLS. Truy cập từ xa qua Cloudflare hoặc Tailscale, không mở cổng.</p>
+</article>
+<article class="sheet card rv" style="--f: 40px; grid-column: span 2"><div class="fold" style="background: #0B5F67"></div>
+<span class="tag pro">Pro</span>
+<h3 class="d" style="margin: 0; font-size: 28px; font-weight: 740; letter-spacing: -0.02em; line-height: 1.1; color: #0E7C86">Quản trị</h3>
+<p style="margin: 0; color: #3A4252">Ổ đĩa và lưu trữ, giám sát tài nguyên, nhật ký, người dùng và nhóm, thư mục chia sẻ, thiết bị USB, Media và Photos.</p>
+</article>
+</div>
+</section>
+
+<section aria-label="Ảnh màn hình" style="padding-bottom: 88px">
+<div class="shots">
+<figure><div class="phone"><img src="/assets/screens/files.jpg" alt="Màn Tệp liệt kê các thư mục chia sẻ trên NAS" loading="lazy"></div><figcaption>Tệp<span>Thư mục chia sẻ trên NAS</span></figcaption></figure>
+<figure><div class="phone"><img src="/assets/screens/miniapps.jpg" alt="Danh sách ứng dụng tự host như Prowlarr, Immich, Jellyfin, Pi-hole" loading="lazy"></div><figcaption>Ứng dụng<span>Cài và mở dịch vụ tự host</span></figcaption></figure>
+<figure><div class="phone"><img src="/assets/screens/agent.jpg" alt="Thông tin NasHubs Agent: trực tuyến, Ed25519 và TLS pin, cổng 8443" loading="lazy"></div><figcaption>NasHubs Agent<span>Ed25519 + TLS pin</span></figcaption></figure>
+<figure><div class="phone"><img src="/assets/screens/settings.jpg" alt="Màn Cài đặt với truy cập từ xa, Media Stack, giao diện và ngôn ngữ" loading="lazy"></div><figcaption>Cài đặt<span>Từ xa, giao diện, ngôn ngữ</span></figcaption></figure>
+<figure><div class="phone"><img src="/assets/screens/dashboard-dark.jpg" alt="Màn Tổng quan ở giao diện tối" loading="lazy"></div><figcaption>Giao diện tối<span>Theo hệ thống hoặc tự chọn</span></figcaption></figure>
+</div>
+</section>
+
+<section id="pro" style="background: #1D2433; color: #ECEAE4">
+<div class="wrap" style="padding-top: 104px; padding-bottom: 104px; display: flex; flex-wrap: wrap; gap: 48px 72px">
+<div style="flex: 1 1 340px; max-width: 460px">
+<h2 class="d" style="margin: 0; font-size: clamp(40px, 5vw, 64px); line-height: 1; font-weight: 780; letter-spacing: -0.035em; color: #FFFFFF">Pro là miễn phí. Chỉ cần gửi yêu cầu.</h2>
+<p style="margin: 24px 0 0; color: #A9B0BE">NasHubs không bán gói nào. Không thanh toán, không nhập key. Mỗi tài khoản Google gửi một yêu cầu, tác giả xác nhận là toàn bộ tính năng Pro mở ra trên mọi máy đăng nhập cùng tài khoản.</p>
+</div>
+<ol style="flex: 999 1 520px; min-width: 0; list-style: none; margin: 0; padding: 0">
+<li class="step rv"><b class="n">1</b><div><h3 style="margin: 0; font-size: 22px; font-weight: 700; color: #FFFFFF">Đăng nhập Google</h3><p style="margin: 6px 0 0; color: #A9B0BE">Trong ứng dụng, mở Tài khoản NasHubs và đăng nhập bằng tài khoản Google đã xác minh e-mail.</p></div></li>
+<li class="step rv"><b class="n">2</b><div><h3 style="margin: 0; font-size: 22px; font-weight: 700; color: #FFFFFF">Gửi yêu cầu Pro/VIP</h3><p style="margin: 6px 0 0; color: #A9B0BE">Bấm một nút. Yêu cầu gắn với tài khoản của bạn, không cần ghi chú hay mã nào.</p></div></li>
+<li class="step rv" style="border-bottom: 1px solid #3A4458"><b class="n">3</b><div><h3 style="margin: 0; font-size: 22px; font-weight: 700; color: #FFFFFF">Được xác nhận, Pro mở</h3><p style="margin: 6px 0 0; color: #A9B0BE">Xác nhận được ký số và ứng dụng tự kiểm chữ ký. Đã mở thì nhớ trên máy, mất mạng vẫn dùng được.</p></div></li>
+</ol>
+</div>
+</section>
+
+<section id="bao-mat" class="wrap" style="padding-top: 104px; padding-bottom: 96px; display: flex; flex-wrap: wrap; gap: 40px 72px">
+<h2 class="d rv" style="margin: 0; flex: 1 1 320px; font-size: clamp(36px, 4.4vw, 56px); line-height: 1.02; font-weight: 760; letter-spacing: -0.03em; max-width: 9ch">Dữ liệu NAS ở lại với bạn</h2>
+<div style="flex: 999 1 560px; min-width: 0">
+<div class="rv" style="padding: 24px 0; border-top: 1px solid #DEDAD1"><h3 style="margin: 0; font-size: 21px; font-weight: 700">Mật khẩu nằm trong kho khóa của máy</h3><p style="margin: 6px 0 0; color: #3A4252">Địa chỉ, tài khoản và mật khẩu NAS lưu trong Keychain (iOS) hoặc Android Keystore, chỉ dùng để kết nối NAS.</p></div>
+<div class="rv" style="padding: 24px 0; border-top: 1px solid #DEDAD1"><h3 style="margin: 0; font-size: 21px; font-weight: 700">Đi thẳng tới NAS</h3><p style="margin: 6px 0 0; color: #3A4252">Tệp, ảnh và lệnh quản trị đi trực tiếp giữa điện thoại và NAS. Tác giả không đọc được NAS của bạn.</p></div>
+<div class="rv" style="padding: 24px 0; border-top: 1px solid #DEDAD1; border-bottom: 1px solid #DEDAD1"><h3 style="margin: 0; font-size: 21px; font-weight: 700">Chỉ lưu thứ cần thiết</h3><p style="margin: 6px 0 0; color: #3A4252">Tài khoản NasHubs chỉ giữ e-mail, mã tài khoản và trạng thái yêu cầu Pro. Không quảng cáo, không công cụ phân tích. <a href="/security/">Cam kết bảo mật</a></p></div>
+</div>
+</section>
+
+<section id="tai-ve" style="background: rgba(239, 237, 231, 0.85); border-top: 1px solid #DEDAD1">
+<div class="wrap" style="padding-top: 88px; padding-bottom: 88px">
+<h2 class="d rv" style="margin: 0 0 40px; font-size: clamp(36px, 4.4vw, 56px); line-height: 1.02; font-weight: 760; letter-spacing: -0.03em">Tải NasHubs</h2>
+<div class="grid6">
+<article class="sheet card rv" style="--f: 44px; grid-column: span 3; padding: 32px"><div class="fold" style="background: #0B5F67"></div>
+<div style="height: 6px; width: 64px; border-radius: 3px; background: #0E7C86"></div>
+<p style="margin: 0; font-size: 14px; color: #5F6676">Android 9 trở lên</p>
+<h3 class="d" style="margin: 0; font-size: 36px; font-weight: 760; letter-spacing: -0.03em; line-height: 1.05; color: #0E7C86">Android 2.1.2</h3>
+<p style="margin: 0; color: #3A4252">Tệp APK 19 MB. Mở tệp sau khi tải và cho phép cài từ nguồn này. Cài đè được lên bản preview trước đó.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto; padding-top: 8px">
+<a href="https://github.com/duconmang-io/NasHubs/releases/download/v2.1.2/NasHubs-2.1.2.apk" class="btn teal sm">Tải NasHubs-2.1.2.apk</a>
+<a href="https://github.com/duconmang-io/NasHubs/releases/tag/v2.1.2" class="btn line sm">Ghi chú phát hành</a>
+</div>
+<p style="margin: 0; font-size: 13px; color: #5F6676; word-break: break-all">SHA-256: a42a2ab74bff6acb0c9e12a61f8d1f209b452dc4fb814741190a3aefb2a0f51a</p>
+</article>
+<article class="sheet card rv" style="--f: 44px; grid-column: span 3; padding: 32px"><div class="fold" style="background: #DEDAD1"></div>
+<div style="height: 6px; width: 64px; border-radius: 3px; background: #1D2433"></div>
+<p style="margin: 0; font-size: 14px; color: #5F6676">iPhone, iPad, Mac</p>
+<h3 class="d" style="margin: 0; font-size: 36px; font-weight: 760; letter-spacing: -0.03em; line-height: 1.05">App Store</h3>
+<p style="margin: 0; color: #3A4252">Bản iOS đang có trên App Store. Bản cập nhật theo cách Pro miễn phí mới sẽ phát hành sau.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto; padding-top: 8px">
+<a href="https://apps.apple.com/app/nashubs/id6771762112" class="btn solid sm">Mở App Store</a>
+</div>
+</article>
+</div>
+</div>
+</section>
+
+<section id="lien-he" class="wrap" style="padding-top: 88px; padding-bottom: 88px; display: flex; flex-wrap: wrap; gap: 32px 72px; align-items: flex-end">
+<div style="flex: 1 1 420px; min-width: 0">
+<h2 class="d" style="margin: 0; font-size: clamp(32px, 4vw, 48px); line-height: 1.04; font-weight: 760; letter-spacing: -0.03em">Góp ý, báo lỗi</h2>
+<p style="margin: 14px 0 0; color: #3A4252; max-width: 34em">Gửi e-mail kèm model NAS, phiên bản DSM, phiên bản NasHubs và mô tả ngắn. Nếu Pro chưa mở sau khi gửi yêu cầu, ghi thêm e-mail Google bạn dùng trong ứng dụng.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a href="mailto:duconmang43@gmail.com" class="btn solid">duconmang43@gmail.com</a>
+<a href="https://duconmang.io.vn/" class="btn line">Các sản phẩm khác</a>
+</div>
+</section>
+</main>
+
+<footer style="border-top: 1px solid #DEDAD1">
+<div class="wrap" style="padding-top: 28px; padding-bottom: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 14px; color: #5F6676">
+<p style="margin: 0">© 2026 NasHubs · <a href="https://duconmang.io.vn/" style="color: #5F6676">duconmang.io.vn</a></p>
+<p style="margin: 0"><a href="/privacy/" style="color: #5F6676">Quyền riêng tư</a> · <a href="/security/" style="color: #5F6676">Bảo mật</a> · Không liên kết với Synology</p>
+</div>
+</footer>
+</div>
+<script src="/assets/stats.js" data-site="nashubs" defer></script>
+<script src="/assets/donate.js" data-qr-base="https://duconmang.io.vn/qr/" defer></script>
+</body>
+</html>
