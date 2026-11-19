@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Synology NAS Guides for Android &amp; iPhone – NasHubs</title>
+<meta name="description" content="Practical guides for managing a Synology NAS from your phone: DSM admin, files, Docker containers and secure remote access.">
+<meta name="theme-color" content="#1D2433">
+<link rel="icon" href="/assets/nashubs.svg" type="image/svg+xml">
+<link rel="canonical" href="https://nashubs.duconmang.io.vn/guides/">
+<meta property="og:type" content="website"><meta property="og:title" content="Synology NAS guides – NasHubs"><meta property="og:url" content="https://nashubs.duconmang.io.vn/guides/"><meta property="og:image" content="https://nashubs.duconmang.io.vn/assets/og.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&amp;display=swap">
+<style>
+:root{--ink:#1D2433;--ink2:#3A4252;--muted:#5F6676;--paper:#F7F6F2;--rule:#DEDAD1;--teal:#0E7C86;--tealD:#0B5F67;--tealT:#E3F1F2}
+body{margin:0;background:var(--paper)}
+*{box-sizing:border-box}
+a{color:var(--ink)}a:hover{color:var(--teal)}
+a:focus-visible,button:focus-visible{outline:3px solid #3157E8;outline-offset:3px}
+img{max-width:100%}
+.d{font-family:'Bricolage Grotesque',sans-serif;font-variation-settings:'wdth' 82}
+.wrap{max-width:1200px;margin:0 auto;padding-left:24px;padding-right:24px}
+.btn{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 26px;border-radius:12px;font-weight:600;text-decoration:none}
+.btn.solid{background:var(--ink);color:#fff}.btn.solid:hover{background:#2C3549;color:#fff}
+.btn.teal{background:var(--teal);color:#fff}.btn.teal:hover{background:var(--tealD);color:#fff}
+.btn.line{border:1.5px solid var(--ink);color:var(--ink)}
+.btn.sm{min-height:46px;padding:0 20px;border-radius:10px;font-size:15px}
+.sheet{position:relative;clip-path:polygon(0 0,calc(100% - var(--f,44px)) 0,100% var(--f,44px),100% 100%,0 100%)}
+.fold{position:absolute;top:0;right:0;width:var(--f,44px);height:var(--f,44px);clip-path:polygon(0 0,0 100%,100% 100%);border-bottom-left-radius:10px}
+.card{background:#fff;border-radius:18px;padding:30px;display:flex;flex-direction:column;gap:12px;box-shadow:0 30px 60px -44px rgba(29,36,51,.5)}
+.grid6{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:24px}
+@media (max-width:900px){.grid6>*{grid-column:span 6 !important}}
+@media (min-width:901px) and (max-width:1100px){.grid6>*{grid-column:span 3 !important}}
+.tag{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;padding:3px 10px;border-radius:999px;font-size:13px;font-weight:600}
+.tag.free{background:#EEF0EC;color:var(--ink2)}.tag.pro{background:var(--tealT);color:var(--tealD)}
+.phone{position:relative;width:100%;aspect-ratio:600/1304;border-radius:34px;padding:10px;background:#1D2433;box-shadow:0 40px 70px -40px rgba(29,36,51,.75)}
+.phone img{display:block;width:100%;height:100%;object-fit:cover;border-radius:25px}
+.shots{display:flex;gap:24px;overflow-x:auto;padding:8px 24px 28px max(24px,calc((100vw - 1200px)/2 + 24px));scroll-snap-type:x mandatory;scrollbar-width:thin}
+.shots figure{flex:0 0 220px;margin:0;scroll-snap-align:start}
+.shots figcaption{margin-top:12px;font-size:15px;font-weight:600}
+.shots figcaption span{display:block;font-weight:400;font-size:14px;color:var(--muted)}
+@media (max-width:640px){.navlinks{display:none !important}nav.wrap{justify-content:space-between}}
+.home-bar{background:var(--ink);color:#ECEAE4;font-size:14px}
+.home-bar a{color:#fff;text-decoration:none;font-weight:600}.home-bar a:hover{color:#9FE3E8}
+.sig{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;background-image:linear-gradient(rgba(29,36,51,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(29,36,51,.055) 1px,transparent 1px);background-size:40px 40px;background-position:-1px -1px}
+.sg{position:absolute;opacity:.8;display:none}
+.step{display:flex;gap:20px;padding:28px 0;border-top:1px solid #3A4458}
+.faq details{padding:20px 0;border-top:1px solid #DEDAD1}.faq details:last-child{border-bottom:1px solid #DEDAD1}.faq summary{cursor:pointer;font-weight:700;font-size:19px}.faq p{margin:10px 0 0;color:#3A4252;max-width:44em}
+.step b.n{flex:none;width:44px;height:44px;border-radius:50%;border:1.5px solid #6FD3DB;color:#9FE3E8;display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-size:20px}
+@media (prefers-reduced-motion:no-preference){
+.sg{display:block;animation-timing-function:linear;animation-iteration-count:infinite}
+@keyframes sr{from{left:-80px}to{left:calc(100vw + 20px)}}
+@keyframes sl{from{left:calc(100vw + 20px)}to{left:-80px}}
+@keyframes sd{from{top:-80px}to{top:calc(100vh + 20px)}}
+@keyframes p1{0%{left:-20px;top:280px}45%{left:520px;top:280px}100%{left:520px;top:calc(100vh + 20px)}}
+@keyframes p2{0%{left:calc(100vw + 20px);top:640px}40%{left:880px;top:640px}100%{left:880px;top:-20px}}
+.sr{animation-name:sr}.sl{animation-name:sl}.sd{animation-name:sd}.p1{animation-name:p1}.p2{animation-name:p2}
+@keyframes rise{from{opacity:0;translate:0 28px}to{opacity:1;translate:0 0}}
+.in{animation:rise .7s cubic-bezier(.2,.8,.2,1) both;animation-delay:var(--d,0s)}
+@keyframes blink{0%,100%{opacity:.25}50%{opacity:1}}
+.led{animation:blink 1.6s ease-in-out infinite}
+@supports (animation-timeline:view()){
+@keyframes up{from{opacity:0;translate:0 60px}to{opacity:1;translate:0 0}}
+.rv{animation:up linear both;animation-timeline:view();animation-range:entry 0% entry 70%}
+}
+}
+
+.art{max-width:760px}
+.art h2{font-family:'Bricolage Grotesque',sans-serif;font-variation-settings:'wdth' 82;font-size:clamp(26px,3vw,34px);line-height:1.1;letter-spacing:-.02em;margin:56px 0 12px}
+.art h3{font-size:19px;margin:32px 0 6px}
+.art p,.art li{color:#3A4252}
+.art li{margin:6px 0}
+.art ol.steps{counter-reset:s;list-style:none;padding:0}
+.art ol.steps>li{counter-increment:s;position:relative;padding:0 0 0 56px;margin:22px 0}
+.art ol.steps>li::before{content:counter(s);position:absolute;left:0;top:-2px;width:38px;height:38px;border-radius:50%;border:1.5px solid #0E7C86;color:#0B5F67;display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-size:18px}
+.art ol.steps>li b:first-child{color:#1D2433}
+.art figure{margin:32px 0;display:flex;gap:20px;flex-wrap:wrap}
+.art figure .phone{width:220px;flex:none}
+.art figure figcaption{flex:1 1 220px;align-self:center;font-size:15px;color:#5F6676}
+.note{background:#fff;border-left:4px solid #0E7C86;border-radius:0 12px 12px 0;padding:16px 20px;margin:24px 0}
+.note p{margin:0}
+.art table{border-collapse:collapse;width:100%;font-size:15px;background:#fff;border-radius:12px;overflow:hidden}
+.art th,.art td{text-align:left;padding:12px 14px;border-bottom:1px solid #DEDAD1;vertical-align:top}
+.art th{background:#EEF0EC;color:#1D2433}
+.crumb{font-size:14px;color:#5F6676}.crumb a{color:#5F6676}
+.cta{background:#1D2433;color:#ECEAE4;border-radius:18px;padding:32px;margin:56px 0 0}
+.cta h2{color:#fff;margin-top:0}.cta p{color:#C9CDD6}
+.glist a{display:block;text-decoration:none;background:#fff;border-radius:16px;padding:24px;box-shadow:0 30px 60px -44px rgba(29,36,51,.5)}
+.glist a:hover h2{color:#0E7C86}
+</style>
+</head>
+<body>
+<div style="font-family: 'Be Vietnam Pro', sans-serif; color: #1D2433; position: relative; isolation: isolate; font-size: 17px; line-height: 1.7">
+<div class="sig" aria-hidden="true"></div>
+<div class="home-bar"><div class="wrap" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 16px; min-height: 40px"><a href="https://duconmang.io.vn/">← duconmang.io.vn</a><span style="color: #A9B0BE">An independent app by duconmang</span></div></div>
+<header style="border-bottom: 1px solid #DEDAD1">
+<nav aria-label="Main" class="wrap" style="padding-top: 18px; padding-bottom: 18px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 32px">
+<a href="/" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: #1D2433"><img src="/assets/nashubs.svg" alt="" style="width: 40px; height: 40px"><span class="d" style="font-size: 26px; font-weight: 760; letter-spacing: -0.02em">Nas<span style="color: #0E7C86">Hubs</span></span></a>
+<div class="navlinks" style="display: flex; flex-wrap: wrap; gap: 4px 24px; flex: 1 1 auto; font-size: 15px; font-weight: 500">
+<a href="/#features" style="text-decoration: none; padding: 10px 0">Features</a>
+<a href="/guides/" style="text-decoration: none; padding: 10px 0">Guides</a>
+<a href="/#privacy" style="text-decoration: none; padding: 10px 0">Privacy</a>
+<a href="/#faq" style="text-decoration: none; padding: 10px 0">FAQ</a>
+</div>
+<a href="/#download" class="btn solid sm">Download</a>
+</nav>
+</header>
+<main class="wrap" style="padding-top: 40px"><div class="art">
+<h1 class="d" style="margin: 8px 0 16px; font-size: clamp(36px, 5vw, 56px); line-height: 1.02; font-weight: 760; letter-spacing: -0.035em">Synology NAS guides</h1>
+<p style="font-size: 20px; color: #3A4252">Practical, phone-first guides for looking after a Synology NAS.</p>
+<div class="glist" style="display: grid; gap: 20px; margin-top: 32px">
+<a href="/guides/manage-synology-from-phone/"><h2 class="d" style="margin: 0 0 6px; font-size: 26px">Manage your Synology NAS from your phone</h2><p style="margin: 0; color: #3A4252">Connect to DSM, watch CPU, RAM and storage, work with files and users, and reach the NAS from anywhere.</p></a>
+<a href="/guides/synology-docker-from-phone/"><h2 class="d" style="margin: 0 0 6px; font-size: 26px">Manage Docker containers on Synology from your phone</h2><p style="margin: 0; color: #3A4252">Container Manager setup tips, then start, stop and install containers from Android or iPhone.</p></a>
+</div>
+</div></main>
+<footer style="border-top: 1px solid #DEDAD1; margin-top: 88px">
+<div class="wrap" style="padding-top: 28px; padding-bottom: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 14px; color: #5F6676">
+<p style="margin: 0">© 2026 NasHubs · <a href="/guides/" style="color: #5F6676">Guides</a> · <a href="https://duconmang.io.vn/" style="color: #5F6676">duconmang.io.vn</a></p>
+<p style="margin: 0"><a href="/privacy/#en" style="color: #5F6676">Privacy</a> · <a href="/security/" style="color: #5F6676">Security</a> · Not affiliated with Synology Inc. Synology and DSM are trademarks of Synology Inc.</p>
+</div></footer>
+</div>
+<script src="/assets/stats.js" data-site="nashubs" defer></script>
+<script src="/assets/donate.js" data-qr-base="https://duconmang.io.vn/qr/" data-lang="en" defer></script>
+</body>
+</html>
