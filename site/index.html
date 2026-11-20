@@ -24,7 +24,7 @@
 <meta name="twitter:title" content="NasHubs – free Synology NAS manager for Android &amp; iPhone">
 <meta name="twitter:description" content="Dashboard, files, Docker and remote access for your Synology NAS. No cloud relay, no ads, no tracking.">
 <meta name="twitter:image" content="https://nashubs.duconmang.io.vn/assets/og.jpg">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "NasHubs", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Android 9+, iOS, iPadOS", "softwareVersion": "2.2.0", "description": "Free Synology NAS manager for Android, iPhone and iPad: live dashboard, file manager, Docker containers, users, storage and secure remote access through NasHubs Agent. No cloud relay, no ads, no tracking.", "url": "https://nashubs.duconmang.io.vn/", "downloadUrl": "https://github.com/duconmang-io/NasHubs/releases/download/v2.2.0/NasHubs-2.2.0.apk", "installUrl": "https://apps.apple.com/app/nashubs/id6771762112", "image": "https://nashubs.duconmang.io.vn/assets/og.jpg", "screenshot": ["https://nashubs.duconmang.io.vn/assets/screens/dashboard.jpg", "https://nashubs.duconmang.io.vn/assets/screens/files.jpg", "https://nashubs.duconmang.io.vn/assets/screens/miniapps.jpg", "https://nashubs.duconmang.io.vn/assets/screens/agent.jpg"], "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "author": {"@type": "Person", "name": "duconmang", "url": "https://duconmang.io.vn/"}, "inLanguage": ["en", "vi"]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "NasHubs", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Android 9+, iOS, iPadOS", "softwareVersion": "2.2.1", "description": "Free Synology NAS manager for Android, iPhone and iPad: live dashboard, file manager, Docker containers, users, storage and secure remote access through NasHubs Agent. No cloud relay, no ads, no tracking.", "url": "https://nashubs.duconmang.io.vn/", "downloadUrl": "https://github.com/duconmang-io/NasHubs/releases/download/v2.2.1/NasHubs-2.2.1.apk", "installUrl": "https://apps.apple.com/app/nashubs/id6771762112", "image": "https://nashubs.duconmang.io.vn/assets/og.jpg", "screenshot": ["https://nashubs.duconmang.io.vn/assets/screens/dashboard.jpg", "https://nashubs.duconmang.io.vn/assets/screens/files.jpg", "https://nashubs.duconmang.io.vn/assets/screens/miniapps.jpg", "https://nashubs.duconmang.io.vn/assets/screens/agent.jpg"], "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "author": {"@type": "Person", "name": "duconmang", "url": "https://duconmang.io.vn/"}, "inLanguage": ["en", "vi"]}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is NasHubs really free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. NasHubs sells no plans and asks for no payment details. Pro features unlock for free: sign in with Google in the app, tap Request Pro, and they open once the request is approved."}}, {"@type": "Question", "name": "Is NasHubs an official Synology app?", "acceptedAnswer": {"@type": "Answer", "text": "No. NasHubs is an independent app that talks to your NAS through DSM's own web API. It is not affiliated with or endorsed by Synology Inc."}}, {"@type": "Question", "name": "Does my data go through a NasHubs server?", "acceptedAnswer": {"@type": "Answer", "text": "No. Your phone connects straight to your NAS on your network, your own domain, or through NasHubs Agent over Cloudflare Tunnel or Tailscale. Files, photos and admin commands never pass through a NasHubs server."}}, {"@type": "Question", "name": "Which Synology models and DSM versions work?", "acceptedAnswer": {"@type": "Answer", "text": "NasHubs is built for DSM 7 and tested on Synology DS918+. Most models that run DSM 7 work; Container Manager features need a model that supports it."}}, {"@type": "Question", "name": "Can I manage Docker containers from my phone?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. NasHubs lists your containers and packages, starts and stops them, and installs popular self-hosted apps such as Jellyfin, Immich and Pi-hole."}}, {"@type": "Question", "name": "How do I access my NAS remotely without opening ports?", "acceptedAnswer": {"@type": "Answer", "text": "Install NasHubs Agent on the NAS. It signs every command with Ed25519 over pinned TLS and reaches you through Cloudflare Tunnel or Tailscale, so no router ports need to be opened."}}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&amp;display=swap">
@@ -111,6 +111,7 @@ img{max-width:100%}
 <div class="navlinks" style="display: flex; flex-wrap: wrap; gap: 4px 24px; flex: 1 1 auto; font-size: 15px; font-weight: 500">
 <a href="#features" style="text-decoration: none; padding: 10px 0">Features</a>
 <a href="#pro" style="text-decoration: none; padding: 10px 0">Free Pro</a>
+<a href="#whats-new" style="text-decoration: none; padding: 10px 0">What's new</a>
 <a href="/guides/" style="text-decoration: none; padding: 10px 0">Guides</a>
 <a href="#privacy" style="text-decoration: none; padding: 10px 0">Privacy</a>
 <a href="#faq" style="text-decoration: none; padding: 10px 0">FAQ</a>
@@ -127,10 +128,10 @@ img{max-width:100%}
 <h1 class="d in" style="--d: .1s; margin: 0; font-size: clamp(44px, 6.2vw, 82px); line-height: 0.98; font-weight: 780; letter-spacing: -0.035em; max-width: 13ch">Your Synology NAS, in your pocket.</h1>
 <p class="in" style="--d: .25s; margin: 28px 0 0; font-size: 20px; line-height: 1.55; color: #3A4252; max-width: 33em">A free Synology NAS manager for Android and iPhone. Watch CPU, RAM and storage, browse files, run Docker containers, manage users and reach your NAS from anywhere through NasHubs Agent. Your phone talks straight to your NAS, with no cloud relay in between.</p>
 <div class="in" style="--d: .4s; display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px">
-<a href="https://github.com/duconmang-io/NasHubs/releases/download/v2.2.0/NasHubs-2.2.0.apk" class="btn teal">Download for Android</a>
+<a href="https://github.com/duconmang-io/NasHubs/releases/download/v2.2.1/NasHubs-2.2.1.apk" class="btn teal">Download for Android</a>
 <a href="https://apps.apple.com/app/nashubs/id6771762112" class="btn line">App Store</a>
 </div>
-<p class="in" style="--d: .5s; margin: 16px 0 0; font-size: 14px; color: #5F6676">Android 2.2.0 · 19 MB · Android 9 or later · also on the App Store</p>
+<p class="in" style="--d: .5s; margin: 16px 0 0; font-size: 14px; color: #5F6676">Android 2.2.1 · 19 MB · Android 9 or later · also on the App Store</p>
 </div>
 <div style="flex: 1 1 380px; min-width: 0; display: flex; justify-content: center; gap: 22px; align-items: flex-end">
 <div class="phone in" style="--d: .3s; flex: 0 1 260px"><img src="/assets/screens/dashboard.jpg" alt="NasHubs dashboard showing CPU, RAM, storage, temperature and remote access status of a Synology DS918+"></div>
@@ -208,6 +209,19 @@ img{max-width:100%}
 </div>
 </section>
 
+<section id="whats-new" class="wrap" style="padding-top: 88px; padding-bottom: 96px; display: flex; flex-wrap: wrap; gap: 48px 64px; align-items: center">
+<div style="flex: 1 1 420px; min-width: 0">
+<p style="margin: 0 0 10px; font-size: 15px; font-weight: 600; color: #0E7C86">NasHubs 2.2.1</p>
+<h2 class="d rv" style="margin: 0 0 16px; font-size: clamp(34px, 4.2vw, 52px); line-height: 1.04; font-weight: 760; letter-spacing: -0.03em">New in 2.2.1: share your NAS with the family</h2>
+<p style="margin: 0 0 20px; font-size: 18px; color: #3A4252; max-width: 56ch">You stay the admin. Everyone else signs in with their own DSM account and gets their own Jellyfin and Immich, limited to what DSM lets them see.</p>
+<ul style="list-style: none; padding: 0; margin: 0 0 28px; max-width: 60ch"><li style="padding: 14px 0; border-top: 1px solid #DEDAD1"><b style="display: block; color: #1D2433">Admins and members</b><span style="color: #3A4252">DSM administrators manage apps and devices; other DSM users pair with their own account, no invitation code.</span></li><li style="padding: 14px 0; border-top: 1px solid #DEDAD1"><b style="display: block; color: #1D2433">Jellyfin shared folder</b><span style="color: #3A4252">Installing Jellyfin creates <code>Jellyfin</code> with Movies, Shows and Music: admins write, every DSM user watches.</span></li><li style="padding: 14px 0; border-top: 1px solid #DEDAD1"><b style="display: block; color: #1D2433">Immich per person</b><span style="color: #3A4252">Uploads stay in an admin-only <code>Immich</code> folder; each user's <code>home/Photos</code> is their own library.</span></li><li style="padding: 14px 0; border-top: 1px solid #DEDAD1"><b style="display: block; color: #1D2433">Follows DSM permissions</b><span style="color: #3A4252">Read, Read/Write or No access on a shared folder decides which libraries each person sees.</span></li></ul>
+<a href="/guides/share-media-with-nas-members/" class="btn solid sm">Read the admin guide</a>
+</div>
+<figure style="flex: 0 1 460px; margin: 0">
+<video controls playsinline preload="none" poster="/assets/video/nashubs-2-2-1.jpg" width="1080" height="1080" style="width: 100%; height: auto; aspect-ratio: 1/1; border-radius: 24px; background: #EFE7DD; box-shadow: 0 40px 70px -44px rgba(29,36,51,.6)"><source src="/assets/video/nashubs-2-2-1.mp4" type="video/mp4"></video>
+<figcaption style="margin-top: 12px; font-size: 14px; color: #5F6676">How it works, in 49 seconds</figcaption>
+</figure>
+</section>
 <section id="download" style="background: rgba(239, 237, 231, 0.85); border-top: 1px solid #DEDAD1">
 <div class="wrap" style="padding-top: 88px; padding-bottom: 88px">
 <h2 class="d rv" style="margin: 0 0 40px; font-size: clamp(36px, 4.4vw, 56px); line-height: 1.02; font-weight: 760; letter-spacing: -0.03em">Download NasHubs</h2>
@@ -215,11 +229,11 @@ img{max-width:100%}
 <article class="sheet card rv" style="--f: 44px; grid-column: span 3; padding: 32px"><div class="fold" style="background: #0B5F67"></div>
 <div style="height: 6px; width: 64px; border-radius: 3px; background: #0E7C86"></div>
 <p style="margin: 0; font-size: 14px; color: #5F6676">Android 9 or later</p>
-<h3 class="d" style="margin: 0; font-size: 36px; font-weight: 760; letter-spacing: -0.03em; line-height: 1.05; color: #0E7C86">Android 2.2.0</h3>
+<h3 class="d" style="margin: 0; font-size: 36px; font-weight: 760; letter-spacing: -0.03em; line-height: 1.05; color: #0E7C86">Android 2.2.1</h3>
 <p style="margin: 0; color: #3A4252">A 19 MB APK. Open it after downloading and allow installs from this source. It installs over earlier versions and keeps your settings.</p>
 <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto; padding-top: 8px">
-<a href="https://github.com/duconmang-io/NasHubs/releases/download/v2.2.0/NasHubs-2.2.0.apk" class="btn teal sm">Download NasHubs-2.2.0.apk</a>
-<a href="https://github.com/duconmang-io/NasHubs/releases/tag/v2.2.0" class="btn line sm">Release notes</a>
+<a href="https://github.com/duconmang-io/NasHubs/releases/download/v2.2.1/NasHubs-2.2.1.apk" class="btn teal sm">Download NasHubs-2.2.1.apk</a>
+<a href="https://github.com/duconmang-io/NasHubs/releases/tag/v2.2.1" class="btn line sm">Release notes</a>
 </div>
 <p style="margin: 0; font-size: 13px; color: #5F6676; word-break: break-all">SHA-256: a42a2ab74bff6acb0c9e12a61f8d1f209b452dc4fb814741190a3aefb2a0f51a</p>
 </article>

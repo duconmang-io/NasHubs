@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chia sẻ Jellyfin và Immich cho mọi người dùng NAS – Hướng dẫn NasHubs 2.2.1</title>
+<meta name="description" content="Dành cho quản trị viên Synology: để người nhà đăng nhập bằng tài khoản DSM riêng, xem phim trong Jellyfin, lưu ảnh trong Immich, quyền xem theo đúng phân quyền DSM.">
+<meta name="theme-color" content="#1D2433">
+<link rel="icon" href="/assets/nashubs.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/nashubs-180.png">
+<link rel="canonical" href="https://nashubs.duconmang.io.vn/vi/guides/chia-se-phim-anh-cho-thanh-vien-nas/">
+<link rel="alternate" hreflang="en" href="https://nashubs.duconmang.io.vn/guides/share-media-with-nas-members/">
+<link rel="alternate" hreflang="vi" href="https://nashubs.duconmang.io.vn/vi/guides/chia-se-phim-anh-cho-thanh-vien-nas/">
+<link rel="alternate" hreflang="x-default" href="https://nashubs.duconmang.io.vn/guides/share-media-with-nas-members/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="NasHubs">
+<meta property="og:title" content="Chia sẻ phim và ảnh cho mọi người trên NAS">
+<meta property="og:description" content="Dành cho quản trị viên Synology: để người nhà đăng nhập bằng tài khoản DSM riêng, xem phim trong Jellyfin, lưu ảnh trong Immich, quyền xem theo đúng phân quyền DSM.">
+<meta property="og:url" content="https://nashubs.duconmang.io.vn/vi/guides/chia-se-phim-anh-cho-thanh-vien-nas/">
+<meta property="og:image" content="https://nashubs.duconmang.io.vn/assets/video/nashubs-2-2-1.jpg">
+<meta property="og:video" content="https://nashubs.duconmang.io.vn/assets/video/nashubs-2-2-1.mp4">
+<meta property="og:locale" content="vi_VN">
+<meta property="article:published_time" content="2026-11-20">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Chia sẻ phim và ảnh cho mọi người trên NAS">
+<meta name="twitter:description" content="Dành cho quản trị viên Synology: để người nhà đăng nhập bằng tài khoản DSM riêng, xem phim trong Jellyfin, lưu ảnh trong Immich, quyền xem theo đúng phân quyền DSM.">
+<meta name="twitter:image" content="https://nashubs.duconmang.io.vn/assets/video/nashubs-2-2-1.jpg">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Chia sẻ phim và ảnh cho mọi người trên NAS", "description": "Dành cho quản trị viên Synology: để người nhà đăng nhập bằng tài khoản DSM riêng, xem phim trong Jellyfin, lưu ảnh trong Immich, quyền xem theo đúng phân quyền DSM.", "datePublished": "2026-11-20", "inLanguage": "vi", "author": {"@type": "Person", "name": "duconmang"}, "mainEntityOfPage": "https://nashubs.duconmang.io.vn/vi/guides/chia-se-phim-anh-cho-thanh-vien-nas/"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "VideoObject", "name": "Chia sẻ phim và ảnh cho mọi người trên NAS", "description": "Dành cho quản trị viên Synology: để người nhà đăng nhập bằng tài khoản DSM riêng, xem phim trong Jellyfin, lưu ảnh trong Immich, quyền xem theo đúng phân quyền DSM.", "thumbnailUrl": "https://nashubs.duconmang.io.vn/assets/video/nashubs-2-2-1.jpg", "uploadDate": "2026-11-20", "contentUrl": "https://nashubs.duconmang.io.vn/assets/video/nashubs-2-2-1.mp4", "duration": "PT49S"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Thành viên có cài hoặc gỡ app được không?", "acceptedAnswer": {"@type": "Answer", "text": "Không. Chỉ quản trị viên DSM được cài, cập nhật, gỡ app, mời thiết bị hay thay đổi Agent."}}, {"@type": "Question", "name": "Vì sao thành viên không thấy thư viện Jellyfin nào?", "acceptedAnswer": {"@type": "Answer", "text": "Tài khoản DSM của họ không có quyền đọc thư mục đó, hoặc bị đặt No access. Kiểm tra Control Panel → Shared Folder → Permissions và chờ tối đa 10 phút."}}, {"@type": "Question", "name": "Ảnh tải lên Immich nằm ở đâu?", "acceptedAnswer": {"@type": "Answer", "text": "Trong shared folder Immich, chỉ quản trị viên mở được. Ảnh có sẵn trong home/Photos của mỗi người vẫn nằm nguyên chỗ cũ, Immich chỉ đọc."}}, {"@type": "Question", "name": "Có cần Synology Photos không?", "acceptedAnswer": {"@type": "Answer", "text": "Không. Immich chỉ cần bật User Home trong DSM."}}]}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&amp;display=swap">
+<style>
+:root{--ink:#1D2433;--ink2:#3A4252;--muted:#5F6676;--paper:#F7F6F2;--rule:#DEDAD1;--teal:#0E7C86;--tealD:#0B5F67;--tealT:#E3F1F2}
+body{margin:0;background:var(--paper)}
+*{box-sizing:border-box}
+a{color:var(--ink)}a:hover{color:var(--teal)}
+a:focus-visible,button:focus-visible{outline:3px solid #3157E8;outline-offset:3px}
+img{max-width:100%}
+.d{font-family:'Bricolage Grotesque',sans-serif;font-variation-settings:'wdth' 82}
+.wrap{max-width:1200px;margin:0 auto;padding-left:24px;padding-right:24px}
+.btn{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 26px;border-radius:12px;font-weight:600;text-decoration:none}
+.btn.solid{background:var(--ink);color:#fff}.btn.solid:hover{background:#2C3549;color:#fff}
+.btn.teal{background:var(--teal);color:#fff}.btn.teal:hover{background:var(--tealD);color:#fff}
+.btn.line{border:1.5px solid var(--ink);color:var(--ink)}
+.btn.sm{min-height:46px;padding:0 20px;border-radius:10px;font-size:15px}
+.sheet{position:relative;clip-path:polygon(0 0,calc(100% - var(--f,44px)) 0,100% var(--f,44px),100% 100%,0 100%)}
+.fold{position:absolute;top:0;right:0;width:var(--f,44px);height:var(--f,44px);clip-path:polygon(0 0,0 100%,100% 100%);border-bottom-left-radius:10px}
+.card{background:#fff;border-radius:18px;padding:30px;display:flex;flex-direction:column;gap:12px;box-shadow:0 30px 60px -44px rgba(29,36,51,.5)}
+.grid6{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:24px}
+@media (max-width:900px){.grid6>*{grid-column:span 6 !important}}
+@media (min-width:901px) and (max-width:1100px){.grid6>*{grid-column:span 3 !important}}
+.tag{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;padding:3px 10px;border-radius:999px;font-size:13px;font-weight:600}
+.tag.free{background:#EEF0EC;color:var(--ink2)}.tag.pro{background:var(--tealT);color:var(--tealD)}
+.phone{position:relative;width:100%;aspect-ratio:600/1304;border-radius:34px;padding:10px;background:#1D2433;box-shadow:0 40px 70px -40px rgba(29,36,51,.75)}
+.phone img{display:block;width:100%;height:100%;object-fit:cover;border-radius:25px}
+.shots{display:flex;gap:24px;overflow-x:auto;padding:8px 24px 28px max(24px,calc((100vw - 1200px)/2 + 24px));scroll-snap-type:x mandatory;scrollbar-width:thin}
+.shots figure{flex:0 0 220px;margin:0;scroll-snap-align:start}
+.shots figcaption{margin-top:12px;font-size:15px;font-weight:600}
+.shots figcaption span{display:block;font-weight:400;font-size:14px;color:var(--muted)}
+@media (max-width:640px){.navlinks{display:none !important}nav.wrap{justify-content:space-between}}
+.home-bar{background:var(--ink);color:#ECEAE4;font-size:14px}
+.home-bar a{color:#fff;text-decoration:none;font-weight:600}.home-bar a:hover{color:#9FE3E8}
+.sig{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;background-image:linear-gradient(rgba(29,36,51,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(29,36,51,.055) 1px,transparent 1px);background-size:40px 40px;background-position:-1px -1px}
+.sg{position:absolute;opacity:.8;display:none}
+.step{display:flex;gap:20px;padding:28px 0;border-top:1px solid #3A4458}
+.faq details{padding:20px 0;border-top:1px solid #DEDAD1}.faq details:last-child{border-bottom:1px solid #DEDAD1}.faq summary{cursor:pointer;font-weight:700;font-size:19px}.faq p{margin:10px 0 0;color:#3A4252;max-width:44em}
+.step b.n{flex:none;width:44px;height:44px;border-radius:50%;border:1.5px solid #6FD3DB;color:#9FE3E8;display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-size:20px}
+@media (prefers-reduced-motion:no-preference){
+.sg{display:block;animation-timing-function:linear;animation-iteration-count:infinite}
+@keyframes sr{from{left:-80px}to{left:calc(100vw + 20px)}}
+@keyframes sl{from{left:calc(100vw + 20px)}to{left:-80px}}
+@keyframes sd{from{top:-80px}to{top:calc(100vh + 20px)}}
+@keyframes p1{0%{left:-20px;top:280px}45%{left:520px;top:280px}100%{left:520px;top:calc(100vh + 20px)}}
+@keyframes p2{0%{left:calc(100vw + 20px);top:640px}40%{left:880px;top:640px}100%{left:880px;top:-20px}}
+.sr{animation-name:sr}.sl{animation-name:sl}.sd{animation-name:sd}.p1{animation-name:p1}.p2{animation-name:p2}
+@keyframes rise{from{opacity:0;translate:0 28px}to{opacity:1;translate:0 0}}
+.in{animation:rise .7s cubic-bezier(.2,.8,.2,1) both;animation-delay:var(--d,0s)}
+@keyframes blink{0%,100%{opacity:.25}50%{opacity:1}}
+.led{animation:blink 1.6s ease-in-out infinite}
+@supports (animation-timeline:view()){
+@keyframes up{from{opacity:0;translate:0 60px}to{opacity:1;translate:0 0}}
+.rv{animation:up linear both;animation-timeline:view();animation-range:entry 0% entry 70%}
+}
+}
+
+.art{max-width:760px}
+.art h2{font-family:'Bricolage Grotesque',sans-serif;font-variation-settings:'wdth' 82;font-size:clamp(26px,3vw,34px);line-height:1.1;letter-spacing:-.02em;margin:56px 0 12px}
+.art h3{font-size:19px;margin:32px 0 6px}
+.art p,.art li{color:#3A4252}
+.art li{margin:6px 0}
+.art ol.steps{counter-reset:s;list-style:none;padding:0}
+.art ol.steps>li{counter-increment:s;position:relative;padding:0 0 0 56px;margin:22px 0}
+.art ol.steps>li::before{content:counter(s);position:absolute;left:0;top:-2px;width:38px;height:38px;border-radius:50%;border:1.5px solid #0E7C86;color:#0B5F67;display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-size:18px}
+.art ol.steps>li b:first-child{color:#1D2433}
+.art figure{margin:32px 0;display:flex;gap:20px;flex-wrap:wrap}
+.art figure .phone{width:220px;flex:none}
+.art figure figcaption{flex:1 1 220px;align-self:center;font-size:15px;color:#5F6676}
+.note{background:#fff;border-left:4px solid #0E7C86;border-radius:0 12px 12px 0;padding:16px 20px;margin:24px 0}
+.note p{margin:0}
+.art table{border-collapse:collapse;width:100%;font-size:15px;background:#fff;border-radius:12px;overflow:hidden}
+.art th,.art td{text-align:left;padding:12px 14px;border-bottom:1px solid #DEDAD1;vertical-align:top}
+.art th{background:#EEF0EC;color:#1D2433}
+.crumb{font-size:14px;color:#5F6676}.crumb a{color:#5F6676}
+.cta{background:#1D2433;color:#ECEAE4;border-radius:18px;padding:32px;margin:56px 0 0}
+.cta h2{color:#fff;margin-top:0}.cta p{color:#C9CDD6}
+.glist a{display:block;text-decoration:none;background:#fff;border-radius:16px;padding:24px;box-shadow:0 30px 60px -44px rgba(29,36,51,.5)}
+.glist a:hover h2{color:#0E7C86}
+.vid{margin:28px 0;max-width:560px}.vid video{width:100%;height:auto;aspect-ratio:1/1;border-radius:22px;background:#EFE7DD;box-shadow:0 30px 60px -36px rgba(29,36,51,.55)}.vid figcaption{font-size:15px;color:#5F6676;margin-top:10px}
+</style>
+</head>
+<body>
+<div style="font-family: 'Be Vietnam Pro', sans-serif; color: #1D2433; position: relative; isolation: isolate; font-size: 17px; line-height: 1.7">
+<div class="sig" aria-hidden="true"></div>
+<div class="home-bar"><div class="wrap" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 16px; min-height: 40px"><a href="https://duconmang.io.vn/">← duconmang.io.vn</a><span style="color: #A9B0BE">An independent app by duconmang</span></div></div>
+<header style="border-bottom: 1px solid #DEDAD1">
+<nav aria-label="Chính" class="wrap" style="padding-top: 18px; padding-bottom: 18px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 32px">
+<a href="/vi/" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: #1D2433"><img src="/assets/nashubs.svg" alt="" style="width: 40px; height: 40px"><span class="d" style="font-size: 26px; font-weight: 760; letter-spacing: -0.02em">Nas<span style="color: #0E7C86">Hubs</span></span></a>
+<div class="navlinks" style="display: flex; flex-wrap: wrap; gap: 4px 24px; flex: 1 1 auto; font-size: 15px; font-weight: 500">
+<a href="/vi/#tinh-nang" style="text-decoration: none; padding: 10px 0">Tính năng</a>
+<a href="/vi/guides/chia-se-phim-anh-cho-thanh-vien-nas/" style="text-decoration: none; padding: 10px 0">Hướng dẫn</a>
+<a href="/vi/#bao-mat" style="text-decoration: none; padding: 10px 0">Bảo mật</a>
+<a href="/vi/#tai-ve" style="text-decoration: none; padding: 10px 0">Tải về</a>
+</div>
+<a href="/vi/#tai-ve" class="btn solid sm">Tải về</a>
+</nav>
+</header>
+<main class="wrap" style="padding-top: 40px">
+<article class="art">
+<p class="crumb"><a href="/vi/">NasHubs</a> / Hướng dẫn</p>
+<h1 class="d" style="margin: 8px 0 16px; font-size: clamp(36px, 5vw, 56px); line-height: 1.02; font-weight: 760; letter-spacing: -0.035em">Chia sẻ phim và ảnh cho mọi người trên NAS</h1>
+<p style="font-size: 20px; color: #3A4252; margin: 0 0 8px">NasHubs 2.2.1 giúp bạn, quản trị viên NAS, cài Jellyfin và Immich một lần rồi cấp cho mỗi người dùng DSM một tài khoản riêng. Ai được xem gì đi theo đúng quyền shared folder bạn đã đặt trong DSM.</p>
+<p style="font-size: 14px; color: #5F6676">Cập nhật <time datetime="2026-11-20">20/11/2026</time> · duconmang · <a href="/guides/share-media-with-nas-members/" hreflang="en">English</a></p>
+<figure class="vid"><video controls playsinline preload="none" poster="/assets/video/nashubs-2-2-1.jpg" width="1080" height="1080"><source src="/assets/video/nashubs-2-2-1.mp4" type="video/mp4"></video><figcaption>Toàn bộ các bước trong 49 giây.</figcaption></figure>
+
+<h2>Bản 2.2.1 có gì mới</h2>
+<ul>
+<li><b>Hai vai trò.</b> Quản trị viên DSM là <b>Admin</b> trong NasHubs: cài, cập nhật, gỡ ứng dụng và quản lý thiết bị. Mọi người dùng DSM khác là <b>Thành viên</b>.</li>
+<li><b>Thành viên ghép bằng chính tài khoản DSM.</b> Không cần mã mời: họ đăng nhập DSM trong NasHubs rồi bấm <i>Kết nối bằng tài khoản DSM</i>. Xoá hoặc vô hiệu tài khoản DSM thì điện thoại của họ tự bị gỡ ghép.</li>
+<li><b>Jellyfin có shared folder riêng.</b> Cài Jellyfin là có shared folder <code>Jellyfin</code> với <code>Movies</code>, <code>Shows</code>, <code>Music</code>. Admin được ghi, mọi người dùng DSM được xem.</li>
+<li><b>Immich có shared folder riêng và thư viện cho từng người.</b> Ảnh tải lên nằm trong shared folder <code>Immich</code> chỉ admin mở được. Thư mục <code>home/Photos</code> của mỗi người dùng DSM thành thư viện Immich của chính họ.</li>
+<li><b>Tài khoản đi theo DSM.</b> Agent tạo tài khoản Jellyfin và Immich cho từng người dùng DSM và giữ quyền xem thư viện khớp với quyền DSM, 10 phút một lần.</li>
+<li><b>Sửa lỗi.</b> Cài ứng dụng lớn không còn dừng ở lỗi HTTP 504 sau cổng DSM; thiết lập nhanh thêm được thư viện cho Jellyfin đã cài; Agent chỉ tạo thư mục bên trong shared folder thật.</li>
+</ul>
+
+<h2>Trước khi bắt đầu</h2>
+<ul>
+<li>Bạn thuộc nhóm <b>administrators</b> trên Synology NAS chạy DSM 7 có Container Manager.</li>
+<li>Đã bật <b>User Home</b> (Control Panel → User &amp; Group → Advanced). Immich cần nó cho thư mục Photos của từng người.</li>
+<li>Điện thoại cài NasHubs 2.2.1, NAS có NasHubs Agent. App tự đề nghị cập nhật Agent.</li>
+</ul>
+
+<h2>Admin thiết lập</h2>
+<ol class="steps">
+<li><b>Kết nối Agent.</b> Mở <i>Apps</i>. Nếu chưa ghép Agent, bấm <i>Set up Agent</i> và cài qua DSM. Nếu app báo Agent cũ, bấm <i>Cập nhật Agent</i>, mất khoảng một phút. Thẻ Agent cần hiện <i>Agent connected · Administrator</i>.</li>
+<li><b>Cài Jellyfin.</b> Trong <i>Discover</i>, chọn Jellyfin rồi <i>Install</i>. Không cần chọn thư mục phim: Agent tự tạo shared folder <code>Jellyfin</code>. Chỉ chọn thêm shared folder có sẵn nếu phim đang nằm ở nơi khác.</li>
+<li><b>Hoàn tất thiết lập nhanh Jellyfin.</b> Đặt tên và mật khẩu admin Jellyfin. Ba thư viện Movies, Shows, Music được điền sẵn. Tài khoản thành viên cũng được bật luôn.</li>
+<li><b>Chép phim.</b> Phim lẻ vào <code>Jellyfin/Movies</code>, phim bộ vào <code>Jellyfin/Shows</code> (mỗi bộ một thư mục), nhạc vào <code>Jellyfin/Music</code>, bằng File Station, SMB trên máy tính hoặc tab File trong NasHubs. Jellyfin tự quét định kỳ; muốn thấy ngay thì vào Jellyfin → Dashboard → <i>Scan All Libraries</i>.</li>
+<li><b>Cài Immich (tuỳ chọn).</b> Cài tương tự và tạo tài khoản admin Immich trong thiết lập nhanh. Agent tạo <code>home/Photos</code> cho mọi người dùng DSM và gắn làm thư viện Immich của người đó. Người dùng mới có thư viện trong vòng 10 phút, không cần khởi động lại Immich.</li>
+</ol>
+
+<h2>Thêm người nhà</h2>
+<ol class="steps">
+<li><b>Tạo người dùng DSM</b> cho từng người trong Control Panel → User &amp; Group. Đừng cho vào nhóm administrators.</li>
+<li><b>Họ cài NasHubs</b>, thêm NAS bằng tên đăng nhập và mật khẩu DSM <i>của chính họ</i>, rồi mở <i>Apps</i>.</li>
+<li><b>Họ bấm <i>Kết nối bằng tài khoản DSM</i>.</b> Agent xác minh phiên DSM và ghép điện thoại ở vai trò Thành viên. Thành viên chỉ thấy các app bạn mở cho họ (Jellyfin, Immich) và không thay đổi được Agent.</li>
+<li><b>Họ đặt mật khẩu app.</b> Trong Jellyfin hoặc Immich, <i>Tài khoản của tôi</i> → mật khẩu mới. Đăng nhập Jellyfin bằng tên người dùng DSM, Immich bằng <code>tên@nashubs.local</code>.</li>
+</ol>
+
+<h2>Quyết định ai được xem gì</h2>
+<p>NasHubs đọc quyền của từng shared folder trong DSM (Control Panel → Shared Folder → Edit → Permissions):</p>
+<ul>
+<li><b>Read/Write</b> hoặc <b>Read only</b>: người đó thấy các thư viện Jellyfin trong thư mục.</li>
+<li><b>No access</b> thắng mọi quyền khác, kể cả quyền theo nhóm. Dùng nó để giấu thư mục với một người.</li>
+<li>Muốn có kho phim chỉ người lớn xem? Tạo thêm shared folder, chỉ cho những người được xem quyền đọc, rồi thêm thư mục đó làm thư viện trong Jellyfin.</li>
+<li>Thay đổi có hiệu lực trong Jellyfin sau khoảng 10 phút.</li>
+</ul>
+
+<h2>Thói quen tốt</h2>
+<ul>
+<li>Đừng cho người dùng thường quyền vào shared folder <code>docker</code>: đó là nơi chứa cấu hình của mọi app.</li>
+<li>Giữ ít tài khoản quản trị DSM; mỗi tài khoản đó đều là Admin trong NasHubs.</li>
+<li>Agent chỉ giữ khoá API của Jellyfin và Immich, không bao giờ giữ mật khẩu.</li>
+</ul>
+
+<h2>Nâng cấp từ 2.2.0</h2>
+<p>Cập nhật app, rồi cập nhật Agent từ màn Apps. Nếu Jellyfin được cài trước 2.2.1 với đường dẫn phim kiểu <code>/volume1/data</code>, mở Jellyfin → <i>Redeploy</i> để tạo shared folder <code>Jellyfin</code>, rồi <i>Quick setup</i> và đăng nhập bằng tài khoản admin Jellyfin hiện có: các thư viện còn thiếu sẽ được thêm.</p>
+
+<section class="faq"><h2 class="d">Câu hỏi</h2>
+<details><summary>Thành viên có cài hoặc gỡ app được không?</summary><p>Không. Chỉ quản trị viên DSM được cài, cập nhật, gỡ app, mời thiết bị hay thay đổi Agent.</p></details>
+<details><summary>Vì sao thành viên không thấy thư viện Jellyfin nào?</summary><p>Tài khoản DSM của họ không có quyền đọc thư mục đó, hoặc bị đặt No access. Kiểm tra Control Panel → Shared Folder → Permissions và chờ tối đa 10 phút.</p></details>
+<details><summary>Ảnh tải lên Immich nằm ở đâu?</summary><p>Trong shared folder <code>Immich</code>, chỉ quản trị viên mở được. Ảnh có sẵn trong <code>home/Photos</code> của mỗi người vẫn nằm nguyên chỗ cũ, Immich chỉ đọc.</p></details>
+<details><summary>Có cần Synology Photos không?</summary><p>Không. Immich chỉ cần bật User Home trong DSM.</p></details>
+</section>
+
+
+<div class="cta"><h2 class="d">Dùng thử NasHubs 2.2.1</h2><p>Miễn phí trên Android, và trên App Store cho iPhone, iPad.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px"><a class="btn teal sm" href="https://github.com/duconmang-io/NasHubs/releases/download/v2.2.1/NasHubs-2.2.1.apk">Tải cho Android</a><a class="btn line sm" style="border-color: #fff; color: #fff" href="https://apps.apple.com/app/nashubs/id6771762112">App Store</a></div></div>
+</article>
+</main>
+<footer style="border-top: 1px solid #DEDAD1; margin-top: 88px">
+<div class="wrap" style="padding-top: 28px; padding-bottom: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 14px; color: #5F6676">
+<p style="margin: 0">© 2026 NasHubs · <a href="/guides/" style="color: #5F6676">Guides</a> · <a href="https://duconmang.io.vn/" style="color: #5F6676">duconmang.io.vn</a></p>
+<p style="margin: 0"><a href="/privacy/#en" style="color: #5F6676">Privacy</a> · <a href="/security/" style="color: #5F6676">Security</a> · Not affiliated with Synology Inc. Synology and DSM are trademarks of Synology Inc.</p>
+</div></footer>
+</div>
+<script src="/assets/stats.js" data-site="nashubs" defer></script>
+<script src="/assets/donate.js" data-qr-base="https://duconmang.io.vn/qr/" data-lang="en" defer></script>
+</body>
+</html>
